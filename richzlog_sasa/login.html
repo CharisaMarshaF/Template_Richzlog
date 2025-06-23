@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RichzLog Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: #5534A5;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    .glass-white {
+      background: rgba(255, 255, 255, 0.97);
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 1rem 0.75rem 0.5rem;
+      background: #f9f9f9;
+      border: 1.5px solid #ddd;
+      border-radius: 12px;
+      color: #333;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .input-field:focus {
+      border-color: #5534A5;
+      box-shadow: 0 0 0 3px #5534A520;
+      background: #fff;
+    }
+
+    .input-group label {
+      position: absolute;
+      top: 1rem;
+      left: 0.85rem;
+      color: #888;
+      pointer-events: none;
+      transition: all 0.3s ease;
+      font-size: 0.875rem;
+    }
+
+    .input-field:focus + label,
+    .input-field:not(:placeholder-shown) + label {
+      top: 0.4rem;
+      left: 0.85rem;
+      font-size: 0.75rem;
+      color: #5534A5;
+    }
+
+    .form-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      color: #2b235a;
+      text-align: center;
+    }
+
+    .btn-login {
+      background: #5534A5;
+      color: white;
+      font-weight: 600;
+      border-radius: 9999px;
+      padding: 0.85rem 1rem;
+      width: 100%;
+      transition: 0.3s ease;
+    }
+
+    .btn-login:hover {
+      background: #472f8c;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Background Mesh -->
+<canvas id="meshCanvas"></canvas>
+
+<!-- Login Form -->
+<div class="min-h-screen flex items-center justify-center px-4">
+  <div class="glass-white">
+
+    <!-- Logo -->
+    <div class="flex justify-center mb-6">
+      <img src="assets/richzlog_bg.png" alt="RichzLog Logo" class="w-24 h-24 object-contain" />
+    </div>
+
+    <!-- Title -->
+    <div class="form-title">Login to RichzLog</div>
+
+    <!-- Form -->
+    <form>
+      <div class="input-group">
+        <input type="text" id="username" placeholder=" " required class="input-field peer"/>
+        <label for="username">Username</label>
+      </div>
+
+      <div class="input-group">
+        <input type="password" id="password" placeholder=" " required class="input-field peer"/>
+        <label for="password">Password</label>
+      </div>
+
+      <button type="submit" class="btn-login shadow-md hover:shadow-lg">
+        Login
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- Background Animation Script -->
+<script>
+  const canvas = document.getElementById('meshCanvas');
+  const ctx = canvas.getContext('2d');
+  let width, height, points;
+
+  function resizeCanvas() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+    points = [];
+
+    for (let i = 0; i < 100; i++) {
+      points.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4
+      });
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+
+    for (let i = 0; i < points.length; i++) {
+      const p = points[i];
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x < 0 || p.x > width) p.vx *= -1;
+      if (p.y < 0 || p.y > height) p.vy *= -1;
+
+      for (let j = i + 1; j < points.length; j++) {
+        const q = points[j];
+        const dx = p.x - q.x;
+        const dy = p.y - q.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 100) {
+          ctx.beginPath();
+          ctx.strokeStyle = 'rgba(255,255,255,' + (1 - dist / 100) + ')';
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
+          ctx.stroke();
+        }
+      }
+
+      ctx.beginPath();
+      ctx.fillStyle = 'white';
+      ctx.arc(p.x, p.y, 1, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+  animate();
+</script>
+
+</body>
+</html>
