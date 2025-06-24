@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rekap Realisasi Tasklist</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+  <style>
+    .dataTables_length,
+    .dataTables_filter {
+      display: none;
+    }
+
+    table.dataTable td {
+      padding-top: 1rem !important;
+      padding-bottom: 1rem !important;
+      border-bottom: 1px solid #e5e7eb !important;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen font-sans">
+  <div class="flex flex-col lg:flex-row">
+    <!-- Sidebar -->
+    <aside class="w-full lg:w-64 bg-white h-auto lg:h-screen shadow-md p-6">
+      <div class="mb-8">
+        <div class="flex items-center space-x-2">
+          <div class="w-6 h-6 bg-purple-700 rounded-full"></div>
+          <span class="font-bold text-lg">RichLog</span>
+        </div>
+      </div>
+
+      <nav class="space-y-4">
+        <div class="text-gray-500 text-sm">Dashboard</div>
+        <div class="text-gray-500 text-sm">Master</div>
+        <div>
+          <div class="font-medium text-sm mb-1 text-gray-500">Tasklists</div>
+          <ul class="ml-3">
+            <li class="text-gray-500 text-sm">Tasklist All</li>
+            <li class="text-gray-500 text-sm">Approval Tasklist</li>
+            <li class="text-gray-500 text-sm">Tasklist Late</li>
+            <li class="text-gray-500 text-sm">Tasklist Recap</li>
+            <li class="text-sm font-medium text-[#5534A5]">Realisasi Tasklist</li>
+          </ul>
+        </div>
+        <div class="text-gray-500 text-sm mt-6">Reports</div>
+        <div class="text-gray-500 text-sm mt-6">Settings</div>
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <main class="flex-1 p-4 md:p-6 lg:p-8">
+      <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-6 gap-2">
+        <h1 class="text-lg font-semibold text-gray-700">Realisasi Tasklist</h1>
+        <span class="text-sm text-gray-400">Monday, 4th September</span>
+      </div>
+
+      <div class="bg-white rounded-xl shadow p-4 md:p-6">
+        <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-2 mb-6">
+          <div class="relative w-full md:w-72">
+            <input type="text" id="tasklistSearch" placeholder="Cari pegawai"
+              class="w-full pl-10 pr-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5534A5]" />
+            <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-3 top-2.5 w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table id="realisasiTable" class="display w-full min-w-full table-fixed divide-y divide-gray-200 text-sm bg-white">
+            <thead class="text-gray-500">
+              <tr class="text-left">
+                <th class="py-3 px-4 w-12">No</th>
+                <th class="py-3 px-4">Pegawai Name</th>
+                <th class="py-3 px-4">Total Tasklist</th>
+                <th class="py-3 px-4">Target</th>
+                <th class="py-3 px-4">Realisasi</th>
+                <th class="py-3 px-4">Sisa Jam Kerja</th>
+              </tr>
+            </thead>
+            <tbody class="text-gray-800">
+              <tr>
+                <td class="py-4 px-4">1</td>
+                <td class="py-4 px-4">Muh Agung P</td>
+                <td class="py-4 px-4">10 Task</td>
+                <td class="py-4 px-4">6 h</td>
+                <td class="py-4 px-4">4 h</td>
+                <td class="py-4 px-4">3 h 42 min</td>
+              </tr>
+              <tr>
+                <td class="py-4 px-4">2</td>
+                <td class="py-4 px-4">Brian Adi P</td>
+                <td class="py-4 px-4">8 Task</td>
+                <td class="py-4 px-4">6 h</td>
+                <td class="py-4 px-4">4 h</td>
+                <td class="py-4 px-4">3 h 42 min</td>
+              </tr>
+              <tr>
+                <td class="py-4 px-4">3</td>
+                <td class="py-4 px-4">Bayuuu</td>
+                <td class="py-4 px-4">2 Task</td>
+                <td class="py-4 px-4">6 h</td>
+                <td class="py-4 px-4">4 h</td>
+                <td class="py-4 px-4">3 h 42 min</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      const table = $('#realisasiTable').DataTable({
+        paging: false,
+        info: false,
+        searching: true,
+        stripeClasses: []
+      });
+
+      $('#tasklistSearch').on('keyup', function () {
+        table.search(this.value).draw();
+      });
+    });
+  </script>
+</body>
+
+</html>

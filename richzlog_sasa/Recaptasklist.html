@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Report - RichLog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <style>
+        table.dataTable td {
+            padding-top: 1.2rem !important;
+            padding-bottom: 1.2rem !important;
+        }
+
+        table.dataTable tbody tr {
+            border-bottom: 1px solid #E5E7EB !important;
+            /* gray-200 */
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 font-sans">
+    <div class="flex flex-col md:flex-row min-h-screen">
+        <!-- Sidebar -->
+        <aside class="w-full md:w-64 bg-white shadow-md px-6 py-8 md:h-screen">
+            <h1 class="text-2xl font-bold text-[#5534A5] mb-10">RichLog</h1>
+            <nav class="space-y-2">
+                <a href="#" class="flex items-center space-x-2 text-gray-600 hover:text-[#5534A5]">
+                    <span>Dashboard</span>
+                </a>
+                <details class="group">
+                    <summary class="cursor-pointer text-gray-600 hover:text-[#5534A5]">Master</summary>
+                </details>
+                <a href="#" class="flex items-center space-x-2 text-gray-600 hover:text-[#5534A5]">
+                    <span>Tasklists</span>
+                </a>
+                <div class="bg-[#5534A5] text-white rounded-lg px-4 py-2">
+                    <p>Reports</p>
+                    <ul class="pl-2 text-sm mt-1">
+                        <li><a href="#" class="text-white">Tasklist Per Pegawai</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 px-4 md:px-10 py-8">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-2">
+                <h2 class="text-2xl font-bold text-gray-800">Recap Tasklist</h2>
+                <p class="text-sm text-gray-500">Monday, 4th September</p>
+            </div>
+
+            <!-- Filter Form Card -->
+            <div class="mb-6 bg-white p-6 rounded-xl shadow">
+                <!-- Atas: Client & Project -->
+                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="block mb-1 text-sm font-medium">Client</label>
+                        <div class="relative">
+                            <i class="fas fa-user absolute left-3 top-3 text-gray-400"></i>
+                            <select class="pl-10 pr-3 py-2 border w-full rounded-md text-sm">
+                                <option>Select Client</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block mb-1 text-sm font-medium">Project</label>
+                        <div class="relative">
+                            <i class="fas fa-folder-open absolute left-3 top-3 text-gray-400"></i>
+                            <select class="pl-10 pr-3 py-2 border w-full rounded-md text-sm">
+                                <option>Select Project</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bawah: Periode & Submit -->
+                <div class="flex flex-col md:flex-row items-end gap-4">
+                    <div class="w-full">
+                        <label class="block mb-1 text-sm font-medium">Periode</label>
+                        <div class="relative">
+                            <i class="fas fa-calendar-alt absolute left-3 top-3 text-gray-400"></i>
+                            <input type="date" class="pl-10 pr-3 py-2 border w-full rounded-md text-sm" />
+                        </div>
+                    </div>
+                    <div class="md:ml-auto">
+                        <button
+                            class="px-6 py-2 bg-white text-gray-500 border border-gray-300 text-sm rounded-md hover:bg-gray-100">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table Section -->
+            <div class="bg-white p-6 rounded-xl shadow">
+                <div class="flex flex-col sm:flex-row justify-between mb-4 gap-2">
+                    <div class="relative">
+                        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                        <input type="text" id="searchInput" placeholder="Cari pegawai"
+                            class="pl-10 pr-3 py-2 border rounded-md text-sm w-full sm:w-64">
+                    </div>
+                    <button class="flex items-center px-4 py-2 border rounded-md border-gray-300 text-gray-500">
+                        <i class="fas fa-file-export mr-2"></i> Export
+                    </button>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table id="tasklistTable"
+                        class="display w-full border-separate border-spacing-y-2 min-w-full divide-y divide-gray-200 text-sm bg-white">
+
+                        <thead class="bg-white text-gray-600 text-base">
+                            <tr>
+                                <th class="px-4 py-3 text-left">No</th>
+                                <th class="px-4 py-3 text-left">Nama Pegawai</th>
+                                <th class="px-4 py-3 text-left">Total Tasklist</th>
+                                <th class="px-4 py-3 text-left">Task Terlambat</th>
+                                <th class="px-4 py-3 text-left">Task Approved</th>
+                                <th class="px-4 py-3 text-left">Task Konfirmasi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-800 text-base divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-4 py-3">1</td>
+                                <td class="px-4 py-3">Muh Agung P</td>
+                                <td class="px-4 py-3">10 Task</td>
+                                <td class="px-4 py-3">3 Task</td>
+                                <td class="px-4 py-3">5 Task</td>
+                                <td class="px-4 py-3">2 Task</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3">2</td>
+                                <td class="px-4 py-3">Brian Adi P</td>
+                                <td class="px-4 py-3">10 Task</td>
+                                <td class="px-4 py-3">3 Task</td>
+                                <td class="px-4 py-3">5 Task</td>
+                                <td class="px-4 py-3">2 Task</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3">3</td>
+                                <td class="px-4 py-3">Bayuuu</td>
+                                <td class="px-4 py-3">10 Task</td>
+                                <td class="px-4 py-3">3 Task</td>
+                                <td class="px-4 py-3">5 Task</td>
+                                <td class="px-4 py-3">2 Task</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- DataTables Script -->
+            <script>
+                $(document).ready(function () {
+                    let table = $('#tasklistTable').DataTable({
+                        paging: false,
+                        info: false,
+                        searching: true, // penting: aktifkan searching
+                        dom: 't' // tampilkan hanya tabel
+                    });
+
+                    $('#searchInput').on('keyup', function () {
+                        table.search(this.value).draw();
+                    });
+                });
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

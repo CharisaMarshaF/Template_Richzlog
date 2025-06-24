@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report - RichLog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <style>
+        table.dataTable tr.bg-red-100 td {
+            background-color: #FEE2E2 !important;
+        }
+
+        table.dataTable tr.bg-green-100 td {
+            background-color: #D1FAE5 !important;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 font-sans">
+    <div class="flex flex-col md:flex-row min-h-screen">
+        <!-- Sidebar -->
+        <aside class="w-full md:w-64 bg-white shadow-md px-6 py-8 md:h-screen">
+            <h1 class="text-2xl font-bold text-[#5534A5] mb-10">RichLog</h1>
+            <nav class="space-y-2">
+                <a href="#" class="flex items-center space-x-2 text-gray-600 hover:text-[#5534A5]">
+                    <span>Dashboard</span>
+                </a>
+                <details class="group">
+                    <summary class="cursor-pointer text-gray-600 hover:text-[#5534A5]">Master</summary>
+                </details>
+                <a href="#" class="flex items-center space-x-2 text-gray-600 hover:text-[#5534A5]">
+                    <span>Tasklists</span>
+                </a>
+                <div class="bg-[#5534A5] text-white rounded-lg px-4 py-2">
+                    <p>Reports</p>
+                    <ul class="pl-2 text-sm mt-1">
+                        <li><a href="#" class="text-white">Tasklist Per Pegawai</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 px-4 md:px-10 py-8">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-2">
+                <h2 class="text-2xl font-bold text-gray-800">Report</h2>
+                <p class="text-sm text-gray-500">Monday, 4th September</p>
+            </div>
+
+            <!-- Table Card -->
+            <div class="bg-white shadow-xl rounded-xl p-6">
+                <!-- Custom Search and Filter -->
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 relative">
+                    <div class="flex items-center w-full sm:max-w-md relative">
+                        <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-4.35-4.35M16.65 16.65A7.5 7.5 0 1116.65 2.5a7.5 7.5 0 010 14.15z" />
+                        </svg>
+                        <input type="text" id="customSearch" placeholder="Find Tasklist"
+                            class="w-full pl-10 pr-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5534A5]" />
+                    </div>
+                    <div class="relative">
+                        <button id="toggleFilter"
+                            class="flex items-center space-x-2 text-sm text-gray-700 hover:text-[#5534A5] border border-gray-300 px-3 py-1 rounded">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2H3V4zm0 4h18v2H3V8zm0 4h12v2H3v-2zm0 4h8v2H3v-2z" />
+                            </svg>
+                            <span>Filter</span>
+                        </button>
+                        <div id="filterOptions"
+                            class="hidden mt-2 bg-white border rounded shadow-lg absolute right-0 z-10 w-48">
+                            <button data-filter="" class="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100">Semua</button>
+                            <button data-filter="green" class="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100">Sedang Dikerjakan</button>
+                            <button data-filter="red" class="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100">Terlambat Mengerjakan</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table id="reportTable" class="min-w-full table-fixed border-separate border-spacing-y-2 divide-y divide-gray-200">
+                        <thead class="bg-white text-gray-500 text-sm">
+                            <tr>
+                                <th class="px-6 py-4 text-left">No</th>
+                                <th class="px-6 py-4 text-left">Nama Pegawai</th>
+                                <th class="px-6 py-4 text-left">Project</th>
+                                <th class="px-6 py-4 text-left">Modul</th>
+                                <th class="px-6 py-4 text-left">Mulai Dikerjakan</th>
+                                <th class="px-6 py-4 text-left">Target Durasi</th>
+                                <th class="px-6 py-4 text-left">Selesai Dikerjakan</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-700 text-sm divide-y divide-gray-200">
+                            <tr class="bg-green-100">
+                                <td class="px-6 py-4">1</td>
+                                <td class="px-6 py-4">Charisa</td>
+                                <td class="px-6 py-4">FJM</td>
+                                <td class="px-6 py-4">Summary</td>
+                                <td class="px-6 py-4">2025-05-28 10:19:02</td>
+                                <td class="px-6 py-4">4 Jam</td>
+                                <td class="px-6 py-4">3h 16 Min 49 sec</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4">2</td>
+                                <td class="px-6 py-4">Ahmad</td>
+                                <td class="px-6 py-4">-</td>
+                                <td class="px-6 py-4">-</td>
+                                <td class="px-6 py-4">-</td>
+                                <td class="px-6 py-4">-</td>
+                                <td class="px-6 py-4 text-red-500">Belum Memulai Tugas</td>
+                            </tr>
+                            <tr class="bg-red-100">
+                                <td class="px-6 py-4">3</td>
+                                <td class="px-6 py-4">Agung</td>
+                                <td class="px-6 py-4">Dextra</td>
+                                <td class="px-6 py-4">Input</td>
+                                <td class="px-6 py-4">2025-05-28 10:19:02</td>
+                                <td class="px-6 py-4">4 Jam</td>
+                                <td class="px-6 py-4">22h 16 Min 49 sec</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4">4</td>
+                                <td class="px-6 py-4">Brian</td>
+                                <td class="px-6 py-4">-</td>
+                                <td class="px-6 py-4">-</td>
+                                <td class="px-6 py-4">-</td>
+                                <td class="px-6 py-4">-</td>
+                                <td class="px-6 py-4 text-red-500">Belum Memulai Tugas</td>
+                            </tr>
+                            <tr class="bg-green-100">
+                                <td class="px-6 py-4">5</td>
+                                <td class="px-6 py-4">Raras</td>
+                                <td class="px-6 py-4">FJM</td>
+                                <td class="px-6 py-4">Search</td>
+                                <td class="px-6 py-4">2025-05-28 10:19:02</td>
+                                <td class="px-6 py-4">6 Jam</td>
+                                <td class="px-6 py-4">2h 16 Min 49 sec</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Legend -->
+                <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6 mt-6 text-sm">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-4 h-4 bg-red-200 rounded"></div>
+                        <span>Terlambat Mengerjakan</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-4 h-4 bg-green-200 rounded"></div>
+                        <span>Sedang Dikerjakan</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const table = $('#reportTable').DataTable({
+            paging: false,
+            info: false,
+            dom: 't'
+        });
+
+        $('#customSearch').on('keyup', function () {
+            table.search(this.value).draw();
+        });
+
+        document.getElementById('toggleFilter').addEventListener('click', () => {
+            const dropdown = document.getElementById('filterOptions');
+            dropdown.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('#filterOptions button').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const value = this.getAttribute('data-filter');
+                if (value === 'green') {
+                    table.rows().every(function () {
+                        const row = this.node();
+                        $(row).toggle($(row).hasClass('bg-green-100'));
+                    });
+                } else if (value === 'red') {
+                    table.rows().every(function () {
+                        const row = this.node();
+                        $(row).toggle($(row).hasClass('bg-red-100'));
+                    });
+                } else {
+                    table.rows().every(function () {
+                        $(this.node()).show();
+                    });
+                }
+                document.getElementById('filterOptions').classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Report Durasi Tasklist</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+    <style>
+        .dataTables_length,
+        .dataTables_filter {
+            display: none;
+        }
+
+        .purple-text {
+            color: #5534A5;
+        }
+
+        table.dataTable td {
+            padding-top: 1rem !important;
+            padding-bottom: 1rem !important;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen font-sans">
+    <div class="flex flex-col md:flex-row">
+        <!-- Sidebar -->
+        <aside class="w-full md:w-64 bg-white h-auto md:h-screen shadow-md p-6">
+            <div class="mb-8">
+                <div class="flex items-center space-x-2">
+                    <div class="w-6 h-6 bg-purple-700 rounded-full"></div>
+                    <span class="font-bold text-lg">RichLog</span>
+                </div>
+            </div>
+
+            <nav class="space-y-4">
+                <div class="text-gray-500 text-sm">Dashboard</div>
+                <div class="text-gray-500 text-sm">Master</div>
+
+                <div>
+                    <div class="font-medium text-sm mb-1 text-gray-500">Tasklists</div>
+                    <ul class="ml-3">
+                        <li class="text-gray-500 text-sm">Tasklist Per Pegawai</li>
+                        <li class="text-sm font-medium purple-text">Report Durasi Tasklist</li>
+                    </ul>
+                </div>
+
+                <div class="text-gray-500 text-sm mt-6">Settings</div>
+            </nav>
+        </aside>
+
+        <!-- Main content -->
+        <main class="flex-1 p-4 md:p-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-2">
+                <h1 class="text-lg font-semibold text-gray-700">Report Durasi Tasklist</h1>
+                <span class="text-sm text-gray-400">Monday, 4th September</span>
+            </div>
+
+            <div class="bg-white rounded-xl shadow p-4 md:p-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-2">
+                    <div class="relative w-full md:w-72">
+                        <input type="text" id="tasklistSearch" placeholder="Find Tasklist"
+                            class="w-full pl-10 pr-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5534A5]" />
+                        <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-3 top-2.5 w-5 h-5 text-gray-500"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z" />
+                        </svg>
+                    </div>
+
+                    <button class="flex items-center px-4 py-2 border rounded-lg border-gray-300 text-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-[#5534A5]" fill="none"
+                            viewBox="0 0 24 24" stroke="#5534A5">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707l-4.414 4.414A1 1 0 0016 11v7a1 1 0 01-1 1h-6a1 1 0 01-1-1v-7a1 1 0 00-.293-.707L3 6.707A1 1 0 013 6V4z" />
+                        </svg>
+                        <span class="text-[#5534A5]">Filter</span>
+                    </button>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table id="durasiTable"
+                        class="display w-full border-separate border-spacing-y-2 min-w-full table-fixed divide-y divide-gray-200 text-sm bg-white">
+                        <thead class="text-gray-500">
+                            <tr class="text-left">
+                                <th class="py-3 px-4 w-12">No</th>
+                                <th class="py-3 px-4">Nama Pegawai</th>
+                                <th class="py-3 px-4">No Tasklist</th>
+                                <th class="py-3 px-4">Clock In</th>
+                                <th class="py-3 px-4">Clock Out</th>
+                                <th class="py-3 px-4">Durasi Pengerjaan</th>
+                                <th class="py-3 px-4">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-800">
+                            <tr class="border-t">
+                                <td class="py-4 px-4">1</td>
+                                <td class="py-4 px-4">Charisa</td>
+                                <td class="py-4 px-4">0007</td>
+                                <td class="py-4 px-4">2025-05-28 10:19:02</td>
+                                <td class="py-4 px-4">2025-05-28 10:19:02</td>
+                                <td class="py-4 px-4">00:08:56</td>
+                                <td class="py-4 px-4">
+                                    <button onclick="document.getElementById('modalDetail').classList.remove('hidden')"
+                                        class="flex items-center text-[#5534A5] font-medium">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none"
+                                            viewBox="0 0 24 24" stroke="#5534A5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                        </svg>
+                                        <span style="color: #5534A5 !important;">Detail</span>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="border-t">
+                                <td class="py-4 px-4">1</td>
+                                <td class="py-4 px-4">Charisa</td>
+                                <td class="py-4 px-4">0007</td>
+                                <td class="py-4 px-4">2025-05-28 10:19:02</td>
+                                <td class="py-4 px-4">2025-05-28 10:19:02</td>
+                                <td class="py-4 px-4">00:08:56</td>
+                                <td class="py-4 px-4">
+                                    <button onclick="document.getElementById('modalDetail').classList.remove('hidden')"
+                                        class="flex items-center text-[#5534A5] font-medium">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none"
+                                            viewBox="0 0 24 24" stroke="#5534A5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                        </svg>
+                                        <span style="color: #5534A5 !important;">Detail</span>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="border-t">
+                                <td class="py-4 px-4">1</td>
+                                <td class="py-4 px-4">Charisa</td>
+                                <td class="py-4 px-4">0007</td>
+                                <td class="py-4 px-4">2025-05-28 10:19:02</td>
+                                <td class="py-4 px-4">2025-05-28 10:19:02</td>
+                                <td class="py-4 px-4">00:08:56</td>
+                                <td class="py-4 px-4">
+                                    <button onclick="document.getElementById('modalDetail').classList.remove('hidden')"
+                                        class="flex items-center text-[#5534A5] font-medium">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none"
+                                            viewBox="0 0 24 24" stroke="#5534A5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                        </svg>
+                                        <span style="color: #5534A5 !important;">Detail</span>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="border-t">
+                                <td class="py-4 px-4">1</td>
+                                <td class="py-4 px-4">Charisa</td>
+                                <td class="py-4 px-4">0007</td>
+                                <td class="py-4 px-4">2025-05-28 10:19:02</td>
+                                <td class="py-4 px-4">2025-05-28 10:19:02</td>
+                                <td class="py-4 px-4">00:08:56</td>
+                                <td class="py-4 px-4">
+                                    <button onclick="document.getElementById('modalDetail').classList.remove('hidden')"
+                                        class="flex items-center text-[#5534A5] font-medium">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none"
+                                            viewBox="0 0 24 24" stroke="#5534A5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                        </svg>
+                                        <span style="color: #5534A5 !important;">Detail</span>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Modal Detail -->
+            <div id="modalDetail"
+                class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 px-4">
+                <div class="bg-white rounded-lg p-6 w-full max-w-3xl">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-semibold text-gray-800">Detail Report Durasi Tasklist</h2>
+                        <button onclick="document.getElementById('modalDetail').classList.add('hidden')"
+                            class="text-gray-500 hover:text-red-500">✕</button>
+                    </div>
+
+                    <div class="text-sm mb-4">
+                        <div class="grid grid-cols-3 gap-y-2 text-gray-500">
+                            <div class="font-semibold">Nama Tasklist</div>
+                            <div class="col-span-2">: Test</div>
+
+                            <div class="font-semibold">No Tasklist</div>
+                            <div class="col-span-2">: 0001</div>
+
+                            <div class="font-semibold">Nama Pegawai</div>
+                            <div class="col-span-2">: BayuuuuArdiiiii Setiawaaaannnn</div>
+
+                            <div class="font-semibold">Status</div>
+                            <div class="col-span-2">: Summited</div>
+
+                            <div class="font-semibold">Total Durasi</div>
+                            <div class="col-span-2">: 8h 10min 12 sec</div>
+
+                            <div class="font-semibold">Total Clock In / Out</div>
+                            <div class="col-span-2">: 9</div>
+                        </div>
+                    </div>
+
+                    <h3 class="text-sm font-semibold mb-2 text-gray-500">Detail Clock In / Clock Out</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full border text-sm">
+                            <thead class="bg-gray-100 text-gray-500">
+                                <tr>
+                                    <th class="border px-4 py-2 text-left">Clock In</th>
+                                    <th class="border px-4 py-2 text-left">Clock Out</th>
+                                    <th class="border px-4 py-2 text-left">Durasi</th>
+                                    <th class="border px-4 py-2 text-left">Note</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-600">
+                                <tr>
+                                    <td class="border px-4 py-2">2025-05-28 10:15:34</td>
+                                    <td class="border px-4 py-2"></td>
+                                    <td class="border px-4 py-2"></td>
+                                    <td class="border px-4 py-2">Start Clockin</td>
+                                </tr>
+                                <tr>
+                                    <td class="border px-4 py-2"></td>
+                                    <td class="border px-4 py-2">2025-05-28 10:15:38</td>
+                                    <td class="border px-4 py-2">00:00:04</td>
+                                    <td class="border px-4 py-2">Submited Task</td>
+                                </tr>
+                                <tr>
+                                    <td class="border px-4 py-2">2025-05-28 10:15:34</td>
+                                    <td class="border px-4 py-2"></td>
+                                    <td class="border px-4 py-2"></td>
+                                    <td class="border px-4 py-2">Start Clockin</td>
+                                </tr>
+                                <tr>
+                                    <td class="border px-4 py-2"></td>
+                                    <td class="border px-4 py-2">2025-05-28 10:15:38</td>
+                                    <td class="border px-4 py-2">00:00:04</td>
+                                    <td class="border px-4 py-2">Submited Task</td>
+                                </tr>
+                                <tr>
+                                    <td class="border px-4 py-2">2025-05-28 10:15:34</td>
+                                    <td class="border px-4 py-2"></td>
+                                    <td class="border px-4 py-2"></td>
+                                    <td class="border px-4 py-2">Start Clockin</td>
+                                </tr>
+                                <tr>
+                                    <td class="border px-4 py-2"></td>
+                                    <td class="border px-4 py-2">2025-05-28 10:16:34</td>
+                                    <td class="border px-4 py-2">01:00:04</td>
+                                    <td class="border px-4 py-2">Submited Task</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            const table = $('#durasiTable').DataTable({
+                paging: false,
+                info: false,
+                searching: true,
+                stripeClasses: []
+            });
+
+            $('#tasklistSearch').on('keyup', function () {
+                table.search(this.value).draw();
+            });
+        });
+    </script>
+</body>
+
+</html>
