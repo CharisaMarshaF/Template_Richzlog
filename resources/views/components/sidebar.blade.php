@@ -15,7 +15,7 @@
             return sistemRoutes.includes(this.activeItem);
         },
         isMasterActive() {
-            const masterRoutes = ['master.pegawai', 'master.client', 'master.project', 'master.modul', 'master.menu', 'master.urgensi'];
+            const masterRoutes = ['master.pegawai', 'master.client', 'master.project', 'master.modul', 'master.urgensi'];
             return masterRoutes.includes(this.activeItem);
         },
         isSupportActive() {
@@ -23,11 +23,11 @@
             return supportRoutes.includes(this.activeItem);
         },
         isTasklistActive() {
-            const tasklistRoutes = ['tasklist.semua', 'tasklist.saya', 'tasklist.detail'];
+            const tasklistRoutes = ['tasklist.all', 'tasklist.approval_task', 'tasklist.detail', 'tasklist.late', 'tasklist.recap', 'tasklist.real'];
             return tasklistRoutes.includes(this.activeItem);
         },
         isReportsActive() {
-            const reportRoutes = ['report.harian', 'report.bulanan'];
+            const reportRoutes = ['report.durasi_task', 'report.task_pegawai'];
             return reportRoutes.includes(this.activeItem);
         }
     }"
@@ -134,8 +134,6 @@
                         <li><a href="{{ route('master.modul') }}" :class="{ 'active-link': activeItem === 'master.modul' }"
                                 class="block py-1 px-3 rounded-lg text-sm text-gray-800">Modul</a> {{-- Added text-gray-800 --}}
                         </li>
-                        <li><a href="{{ route('master.menu') }}" :class="{ 'active-link': activeItem === 'master.menu' }"
-                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Menu</a></li> {{-- Added text-gray-800 --}}
                         <li><a href="{{ route('master.urgensi') }}" :class="{ 'active-link': activeItem === 'master.urgensi' }"
                                 class="block py-1 px-3 rounded-lg text-sm text-gray-800">Urgensi</a> {{-- Added text-gray-800 --}}
                         </li>
@@ -204,12 +202,16 @@
                         x-transition:leave="transition-all ease-in duration-250"
                         x-transition:leave-start="opacity-100 height-full" x-transition:leave-end="opacity-0 height-0"
                         class="pl-8 mt-1 space-y-1 overflow-hidden">
-                        <li><a href="{{ route('tasklist.semua') }}" :class="{ 'active-link': activeItem === 'tasklist.semua' }"
-                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Semua
-                                Tugas</a></li> {{-- Added text-gray-800 --}}
-                        <li><a href="{{ route('tasklist.saya') }}" :class="{ 'active-link': activeItem === 'tasklist.saya' }"
-                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Tugas
-                                Saya</a></li> {{-- Added text-gray-800 --}}
+                        <li><a href="{{ route('tasklist.all') }}" :class="{ 'active-link': activeItem === 'tasklist.all' }"
+                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Tasklist All</a></li> {{-- Added text-gray-800 --}}
+                        <li><a href="{{ route('tasklist.approval_task') }}" :class="{ 'active-link': activeItem === 'tasklist.approval_task' }"
+                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Approval Tasklist</a></li>
+                        <li><a href="{{ route('tasklist.late') }}" :class="{ 'active-link': activeItem === 'tasklist.late' }"
+                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Tasklist Late</a></li>
+                        <li><a href="{{ route('tasklist.recap') }}" :class="{ 'active-link': activeItem === 'tasklist.recap' }"
+                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Tasklist Recap</a></li>
+                        <li><a href="{{ route('tasklist.real') }}" :class="{ 'active-link': activeItem === 'tasklist.real' }"
+                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Realisasi Tasklist</a></li>
                     </ul>
                 </li>
 
@@ -239,12 +241,10 @@
                         x-transition:leave="transition-all ease-in duration-250"
                         x-transition:leave-start="opacity-100 height-full" x-transition:leave-end="opacity-0 height-0"
                         class="pl-8 mt-1 space-y-1 overflow-hidden">
-                        <li><a href="{{ route('report.harian') }}" :class="{ 'active-link': activeItem === 'report.harian' }"
-                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Laporan
-                                Harian</a></li> {{-- Added text-gray-800 --}}
-                        <li><a href="{{ route('report.bulanan') }}" :class="{ 'active-link': activeItem === 'report.bulanan' }"
-                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Laporan
-                                Bulanan</a></li> {{-- Added text-gray-800 --}}
+                        <li><a href="{{ route('report.durasi_task') }}" :class="{ 'active-link': activeItem === 'report.durasi_task' }"
+                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Durasi Tasklist</a></li> {{-- Added text-gray-800 --}}
+                        <li><a href="{{ route('report.task_pegawai') }}" :class="{ 'active-link': activeItem === 'report.task_pegawai' }"
+                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Tasklist per Pegawai</a></li> {{-- Added text-gray-800 --}}
                     </ul>
                 </li>
             </ul>
