@@ -1,4 +1,30 @@
-@import './custom.css';
+@import "./custom.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* app.css */
+.custom-input-field {
+    @apply block w-full pl-4 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-purple-500 sm:text-sm;
+}
+.custom-input-icon {
+    @apply block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-purple-500 sm:text-sm;
+}
+.custom-text-area-field {
+    @apply block w-full pl-4 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-purple-500 sm:text-sm;
+}
+.custom-label {
+    @apply block text-sm font-medium text-gray-700;
+}
+.btn-indigo {
+    @apply bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 transition;
+}
+.custom-action-modal {
+    @apply text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100;
+}
+.custom-button-secondary {
+    @apply inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2;
+}
+.custom-confirm-button {
+    @apply inline-flex justify-center rounded-md border border-transparent bg-purple-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2;
+}

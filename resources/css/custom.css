@@ -91,3 +91,12 @@ nav li a:not(.active-link):not(.active-open > a):hover {
     background-color: #f3f4f6; /* gray-100 */
     color: #8b5cf6; /* purple-700 */
 }
+.custom-floating-dropdown {
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+                0 2px 4px -2px rgb(0 0 0 / 0.1);
+    min-width: 10rem;
+    padding: 0.5rem 0;
+}
