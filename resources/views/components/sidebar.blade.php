@@ -44,7 +44,7 @@
                 {{-- Dashboard Item --}}
                 <li class="mb-2">
                     <a href="{{ route('dashboard') }}" :class="{ 'active-link': activeItem === 'dashboard' }"
-                        class="flex items-center py-2 px-3 rounded-lg text-sm relative overflow-hidden text-gray-800"> {{-- Added text-gray-800 --}}
+                        class="flex items-center py-2 px-3 rounded-lg text-sm relative overflow-hidden text-gray-800">
                         {{-- Active State indicator --}}
                         <div x-show="activeItem === 'dashboard'"
                             class="absolute left-0 top-0 h-full w-1.5 bg-purple-700 rounded-r-md"></div>
@@ -88,7 +88,7 @@
                         x-transition:leave-start="opacity-100 height-full" x-transition:leave-end="opacity-0 height-0"
                         class="pl-8 mt-1 space-y-1 overflow-hidden">
                         <li><a href="{{ route('sistem.menu') }}" :class="{ 'active-link': activeItem === 'sistem.menu' }"
-                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Menu</a> {{-- Added text-gray-800 --}}
+                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Menu</a>
                         </li>
                     </ul>
                 </li>
@@ -123,29 +123,29 @@
                         x-transition:leave-start="opacity-100 height-full" x-transition:leave-end="opacity-0 height-0"
                         class="pl-8 mt-1 space-y-1 overflow-hidden">
                         <li><a href="{{ route('master.pegawai') }}" :class="{ 'active-link': activeItem === 'master.pegawai' }"
-                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Pegawai</a> {{-- Added text-gray-800 --}}
+                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Pegawai</a>
                         </li>
                         <li><a href="{{ route('master.client') }}" :class="{ 'active-link': activeItem === 'master.client' }"
-                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Client</a> {{-- Added text-gray-800 --}}
+                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Client</a>
                         </li>
                         <li><a href="{{ route('master.project') }}" :class="{ 'active-link': activeItem === 'master.project' }"
-                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Project</a> {{-- Added text-gray-800 --}}
+                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Project</a>
                         </li>
                         <li><a href="{{ route('master.modul') }}" :class="{ 'active-link': activeItem === 'master.modul' }"
-                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Modul</a> {{-- Added text-gray-800 --}}
+                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Modul</a>
                         </li>
                         <li><a href="{{ route('master.urgensi') }}" :class="{ 'active-link': activeItem === 'master.urgensi' }"
-                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Urgensi</a> {{-- Added text-gray-800 --}}
+                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Urgensi</a>
                         </li>
                     </ul>
                 </li>
 
                 {{-- Support Dropdown --}}
-                <li class="mb-2" x-data="{ open: false }"
+                {{-- <li class="mb-2" x-data="{ open: false }"
                     x-init="open = isSupportActive()"
                     :class="{ 'active-open': isSupportActive() }">
                     <a @click="open = !open" href="#"
-                        class="flex items-center py-2 px-3 rounded-lg justify-between text-sm cursor-pointer text-gray-800"> {{-- Changed text-gray-700 to text-gray-800 --}}
+                        class="flex items-center py-2 px-3 rounded-lg justify-between text-sm cursor-pointer text-gray-800">
                         <span class="flex items-center">
                             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -168,12 +168,12 @@
                         x-transition:leave-start="opacity-100 height-full" x-transition:leave-end="opacity-0 height-0"
                         class="pl-8 mt-1 space-y-1 overflow-hidden">
                         <li><a href="{{ route('support.bantuan') }}" :class="{ 'active-link': activeItem === 'support.bantuan' }"
-                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Bantuan</a> {{-- Added text-gray-800 --}}
+                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Bantuan</a>
                         </li>
                         <li><a href="{{ route('support.faq') }}" :class="{ 'active-link': activeItem === 'support.faq' }"
-                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">FAQ</a></li> {{-- Added text-gray-800 --}}
+                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">FAQ</a></li>
                     </ul>
-                </li>
+                </li> --}}
 
                 {{-- Tasklists Dropdown --}}
                 <li class="mb-2" x-data="{ open: false }"
@@ -203,7 +203,7 @@
                         x-transition:leave-start="opacity-100 height-full" x-transition:leave-end="opacity-0 height-0"
                         class="pl-8 mt-1 space-y-1 overflow-hidden">
                         <li><a href="{{ route('tasklist.all') }}" :class="{ 'active-link': activeItem === 'tasklist.all' }"
-                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Tasklist All</a></li> {{-- Added text-gray-800 --}}
+                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Tasklist All</a></li>
                         <li><a href="{{ route('tasklist.approval_task') }}" :class="{ 'active-link': activeItem === 'tasklist.approval_task' }"
                                 class="block py-1 px-3 rounded-lg text-sm text-gray-800">Approval Tasklist</a></li>
                         <li><a href="{{ route('tasklist.late') }}" :class="{ 'active-link': activeItem === 'tasklist.late' }"
@@ -242,9 +242,9 @@
                         x-transition:leave-start="opacity-100 height-full" x-transition:leave-end="opacity-0 height-0"
                         class="pl-8 mt-1 space-y-1 overflow-hidden">
                         <li><a href="{{ route('report.durasi_task') }}" :class="{ 'active-link': activeItem === 'report.durasi_task' }"
-                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Durasi Tasklist</a></li> {{-- Added text-gray-800 --}}
+                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Durasi Tasklist</a></li>
                         <li><a href="{{ route('report.task_pegawai') }}" :class="{ 'active-link': activeItem === 'report.task_pegawai' }"
-                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Tasklist per Pegawai</a></li> {{-- Added text-gray-800 --}}
+                                class="block py-1 px-3 rounded-lg text-sm text-gray-800">Tasklist per Pegawai</a></li>
                     </ul>
                 </li>
             </ul>
@@ -252,7 +252,7 @@
     </div>
     <div class="mt-auto">
         <a href="{{ route('settings') }}" :class="{ 'active-link': activeItem === 'settings' }"
-            class="flex items-center py-2 px-3 rounded-lg text-sm relative overflow-hidden text-gray-800"> {{-- Added text-gray-800 --}}
+            class="flex items-center py-2 px-3 rounded-lg text-sm relative overflow-hidden text-gray-800">
             <div x-show="activeItem === 'settings'"
                 class="absolute left-0 top-0 h-full w-1.5 bg-purple-700 rounded-r-md"></div>
             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"

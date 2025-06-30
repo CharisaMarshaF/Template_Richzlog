@@ -1,4 +1,3 @@
-{{-- resources/views/components/datatable.blade.php --}}
 @props(['id' => 'datatable', 'disableOrderColumn' => null])
 <div class="bg-white rounded-lg shadow-md p-6 pt-2">
     <div class="flex flex-col md:flex-row justify-between items-center mb-4 space-y-3 md:space-y-0">

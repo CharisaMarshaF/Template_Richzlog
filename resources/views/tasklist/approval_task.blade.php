@@ -36,7 +36,7 @@
             <td class="px-4 py-3">{{ $task['tasklist'] }}</td>
             <td class="px-4 py-3">{{ $task['programmer'] }}</td>
             <td class="px-4 py-3 text-center">
-                <a href="#" class="text-purple-600 hover:underline flex items-center justify-center gap-1">
+                <a href="{{ route('tasklist.detail') }}" class="text-purple-600 hover:underline flex items-center justify-center gap-1">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

@@ -224,7 +224,7 @@
                         </div>
 
                         <div class="flex-1 flex flex-col bg-gray-50 overflow-hidden">
-                            <div class="flex items-center gap-3 mb-4 px-6 pt-6">
+                            <div class="flex items-center gap-3 px-6 p-4 " style="background-color: #f3e8ff;">
                                 <img src="https://randomuser.me/api/portraits/women/44.jpg"
                                     class="w-10 h-10 rounded-full object-cover" alt="PM Profile Picture" />
                                 <div>
@@ -233,7 +233,7 @@
                                 </div>
                             </div>
 
-                            <div class="chat-messages-container" x-ref="chatBody">
+                            <div class="chat-messages-container mt-4" x-ref="chatBody">
                                 <div class="absolute inset-0 overflow-y-auto px-6 pb-4 space-y-6 scroll-smooth"
                                     x-init="$nextTick(() => $refs.chatBody.scrollTop = $refs.chatBody.scrollHeight)">
                                     <div class="flex justify-center">

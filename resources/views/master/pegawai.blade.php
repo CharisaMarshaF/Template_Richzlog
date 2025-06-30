@@ -48,7 +48,8 @@
                         class="dropdown-menu-content hidden absolute w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50"
                         role="menu" aria-orientation="vertical" tabindex="-1">
                         <div class="py-1" role="none">
-                            <a href="#" data-modal-target="addPegawai" class="custom-action-modal" role="menuitem" tabindex="-1">
+                            <a href="#" data-modal-target="detailPegawai" class="custom-action-modal" role="menuitem"
+                                tabindex="-1">
                                 <div class="flex items-center">
                                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -59,7 +60,8 @@
                                     Detail
                                 </div>
                             </a>
-                            <a href="#" data-modal-target="addPegawai" class="custom-action-modal" role="menuitem" tabindex="-1">
+                            <a href="#" data-modal-target="addPegawai" class="custom-action-modal" role="menuitem"
+                                tabindex="-1">
                                 <div class="flex items-center">
                                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -70,8 +72,7 @@
                                     Edit
                                 </div>
                             </a>
-                            <a href="#" class="custom-action-modal" role="menuitem"
-                                tabindex="-1">
+                            <a href="#" class="custom-action-modal" role="menuitem" tabindex="-1">
                                 <div class="flex items-center">
                                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -293,16 +294,90 @@
             </div>
 
             <div class="mt-6 flex justify-end gap-x-2">
-                <button type="button" data-modal-hide="addPegawai"
-                    class="custom-button-secondary">
+                <button type="button" data-modal-hide="addPegawai" class="custom-button-secondary">
                     Cancel
                 </button>
-                <button type="submit"
-                    class="custom-confirm-button">
+                <button type="submit" class="custom-confirm-button">
                     Confirm
                 </button>
             </div>
         </form>
+    </x-modal>
+    <x-modal id="detailPegawai" title="Detail Pegawai" size="xl">
+        <div class="space-y-4">
+            <div class="flex items-center space-x-6">
+                <img class="w-24 h-24 rounded-full object-cover" src="{{ asset('assets/images/ex.jpg') }}"
+                    alt="Foto Pegawai">
+                <div>
+                    <p class="text-lg font-bold text-gray-800">Muh Agung P</p>
+                    <p class="text-sm text-gray-500">Programmer</p>
+                    <p class="text-sm text-green-600 font-semibold">Status: Active</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="custom-label">NIP</label>
+                    <p class="text-sm text-gray-700">PG123456</p>
+                </div>
+                <div>
+                    <label class="custom-label">Phone</label>
+                    <p class="text-sm text-gray-700">088123456789</p>
+                </div>
+                <div>
+                    <label class="custom-label">Gender</label>
+                    <p class="text-sm text-gray-700">Male</p>
+                </div>
+                <div>
+                    <label class="custom-label">Agama</label>
+                    <p class="text-sm text-gray-700">Islam</p>
+                </div>
+                <div>
+                    <label class="custom-label">Email</label>
+                    <p class="text-sm text-gray-700">muhagung@example.com</p>
+                </div>
+            </div>
+
+            {{-- Alamat full-width --}}
+            <div class="mt-4">
+                <label class="custom-label">Alamat</label>
+                <p class="text-sm text-gray-700">Jl. Teknokrat No. 123, Bandung, Jawa Barat, Indonesia, Kode Pos 40123
+                </p>
+            </div>
+            <hr class="my-6 border-t border-gray-200">
+
+            <p class="text-lg font-semibold text-gray-800 mb-2">Tasklist</p>
+
+            {{-- Row Total Tasklist --}}
+            <div class="bg-purple-100 rounded-md p-4 mb-4">
+                <p class="text-sm text-gray-500">Total Tasklist</p>
+                <p class="text-2xl font-bold text-purple-700">36</p>
+            </div>
+
+            {{-- Row 3 Kolom --}}
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="bg-green-100 rounded-md p-4">
+                    <p class="text-sm text-gray-600">Selesai</p>
+                    <p class="text-xl font-semibold text-green-700">24</p>
+                </div>
+                <div class="bg-yellow-100 rounded-md p-4">
+                    <p class="text-sm text-gray-600">Terlambat</p>
+                    <p class="text-xl font-semibold text-yellow-700">7</p>
+                </div>
+                <div class="bg-blue-100 rounded-md p-4">
+                    <p class="text-sm text-gray-600">Approval</p>
+                    <p class="text-xl font-semibold text-blue-700">5</p>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="mt-6 flex justify-end">
+            <button type="button" data-modal-hide="detailPegawai1" class="custom-button-secondary">
+                Close
+            </button>
+        </div>
     </x-modal>
 
 </x-layout>

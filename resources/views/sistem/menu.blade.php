@@ -27,7 +27,7 @@
         ['name' => '— Client', 'path' => '/master/client', 'file' => 'master/client/index.blade.php', 'desc' => 'Master
         - Client', 'status' => 'Inactive'],
         ] as $index => $menu)
-        <tr class="bg-white border-b even:bg-gray-50 dark:even:bg-gray-900/50">
+        <tr class="bg-white border-b even:bg-gray-50">
             <td class="text-center px-2 py-3">{{ $index + 1 }}</td>
             <td class="px-4 py-3 font-semibold">{{ $menu['name'] }}</td>
             <td class="px-4 py-3">{{ $menu['path'] }}</td>
