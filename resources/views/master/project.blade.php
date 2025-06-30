@@ -68,7 +68,8 @@
                         class="dropdown-menu-content hidden absolute w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50"
                         role="menu" aria-orientation="vertical" tabindex="-1">
                         <div class="py-1" role="none">
-                            <a href="#" class="custom-action-modal" role="menuitem" tabindex="-1">
+                            <a href="#" data-modal-target="projectDetailModal" class="custom-action-modal"
+                                role="menuitem" tabindex="-1">
                                 <div class="flex items-center">
                                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -120,23 +121,33 @@
                             placeholder="Input project name">
                     </div>
                 </div>
-
-                <div>
-                    <label for="clientName" class="custom-label">Client Name</label>
-                    <div class="mt-1 relative rounded-md shadow-sm">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                            </svg>
-                        </div>
-                        <input type="text" id="clientName" name="client_name" class="custom-input-icon"
-                            placeholder="Input client name">
-                    </div>
-                </div>
-
                 <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="menuStatus" class="custom-label">Client</label>
+                        <div class="mt-1 relative rounded-md shadow-sm">
+                            <select id="menuStatus" name="menuStatus"
+                                class="custom-input-icon pl-10 pr-10 py-2 appearance-none">
+                                <option>Select Client</option>
+                                <option value="Pending">Pending</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Completed">Completed</option>
+                                <option value="Canceled">Canceled</option>
+                            </select>
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                                </svg>
+                            </div>
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
                     <div>
                         <label for="projectType" class="custom-label">Project Type</label>
                         <div class="mt-1 relative rounded-md shadow-sm">
@@ -152,47 +163,29 @@
                                 placeholder="e.g., Web Development, Mobile App">
                         </div>
                     </div>
-                    <div>
-                        <label for="dueDate" class="custom-label">Due Date</label>
-                        <div class="mt-1 relative rounded-md shadow-sm">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                    </path>
-                                </svg>
-                            </div>
-                            <input type="date" id="dueDate" name="due_date" class="custom-input-icon">
-                        </div>
+                </div>
+                <div>
+                    <label for="modulDescription" class="custom-label">Description</label>
+                    <div class="mt-1 relative rounded-md shadow-sm">
+                        <textarea id="modulDescription" name="modulDescription" rows="3" class="custom-text-area-field"
+                            placeholder="Modul Description"></textarea>
                     </div>
                 </div>
-
                 <div>
-                    <label for="menuStatus" class="custom-label">Menu Status</label>
+                    <label for="dueDate" class="custom-label">Due Date</label>
                     <div class="mt-1 relative rounded-md shadow-sm">
-                        <select id="menuStatus" name="menuStatus"
-                            class="custom-input-icon pl-10 pr-10 py-2 appearance-none">
-                            <option value="Pending">Pending</option>
-                            <option value="In Progress">In Progress</option>
-                            <option value="Completed">Completed</option>
-                            <option value="Canceled">Canceled</option>
-                        </select>
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                </path>
                             </svg>
                         </div>
-                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                            </svg>
-                        </div>
+                        <input type="date" id="dueDate" name="due_date" class="custom-input-icon">
                     </div>
                 </div>
+
             </div>
 
             <div class="mt-6 flex justify-end gap-x-2">
@@ -205,4 +198,77 @@
             </div>
         </form>
     </x-modal>
+    <x-modal id="projectDetailModal" title="Detail Project FJM" size="2xl">
+        <div class="space-y-4 text-sm text-gray-700">
+            {{-- Client + Status --}}
+            {{-- Header Info --}}
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-4 border-b pb-4 mb-4">
+                <div class="space-y-1">
+                    <h2 class="text-lg font-semibold text-gray-800">Client:
+                        <span class="text-purple-700">FJM</span>
+                    </h2>
+                    <p class="text-sm text-gray-500">Project Type:
+                        <span class="font-medium text-gray-700">iOS Application</span>
+                    </p>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <span class="text-xs font-semibold text-green-700 bg-green-100 px-2 py-1 rounded-md">
+                        Active
+                    </span>
+                    <span class="text-xs font-medium text-blue-600 bg-blue-100 px-2 py-1 rounded-md">
+                        IOS APP
+                    </span>
+                </div>
+            </div>
+
+
+            {{-- Description --}}
+            <div>
+                <p class="font-medium mb-1">Description</p>
+                <div class="p-4 rounded-md bg-gray-50 border text-gray-600 leading-relaxed text-sm">
+                    Welcome! By accessing or using this product, you agree to comply with the following terms and
+                    conditions. These terms outline the rights and responsibilities associated with using this
+                    product. Please take a moment to review them carefully.
+                </div>
+            </div>
+
+            {{-- List Modul --}}
+            <div>
+                <p class="font-medium mb-1">List Modul</p>
+                <table class="w-full text-sm text-left border border-gray-200 rounded-md overflow-hidden">
+                    <thead class="bg-gray-100 text-gray-700">
+                        <tr>
+                            <th class="px-3 py-2 border">No</th>
+                            <th class="px-3 py-2 border">Modul</th>
+                            <th class="px-3 py-2 border">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-white">
+                            <td class="px-3 py-2 border">1</td>
+                            <td class="px-3 py-2 border">Dashboard</td>
+                            <td class="px-3 py-2 border text-green-600 font-semibold">Complete</td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="px-3 py-2 border">2</td>
+                            <td class="px-3 py-2 border">Task</td>
+                            <td class="px-3 py-2 border text-yellow-500 font-semibold">On Track</td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="px-3 py-2 border">3</td>
+                            <td class="px-3 py-2 border">Stack Apps</td>
+                            <td class="px-3 py-2 border text-green-600 font-semibold">Complete</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="mt-6 flex justify-end">
+            <button type="button" data-modal-hide="projectDetailModal" class="custom-button-secondary">
+                Close
+            </button>
+        </div>
+    </x-modal>
+
 </x-layout>

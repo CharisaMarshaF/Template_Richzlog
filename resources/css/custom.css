@@ -47,6 +47,11 @@
         width: 100%;
     }
 }
+@media (prefers-color-scheme: dark) {
+    .dark\:even\:bg-gray-900\/50:nth-child(even) {
+        background-color: rgb(249 250 251 / var(--tw-bg-opacity, 1)) !important;
+    }
+}
 
 /* --- New Active and Open States --- */
 
