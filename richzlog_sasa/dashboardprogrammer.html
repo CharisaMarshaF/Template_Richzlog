@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Logbook Programmer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-purple': '#5534A5',
+                        'dark-purple': '#3B2476',
+                        'light-purple': '#7D62BA',
+                        'soft-purple': '#DED7ED',
+                        'hover-purple': '#4A2E90',
+                        'bg-light': '#F8FAFC',
+                        'card-gradient-start': '#6B4BE0',
+                        'card-gradient-end': '#9B71F5',
+                        'accent-green': '#10B981',
+                        'accent-red': '#EF4444',
+                        'accent-yellow': '#F59E0B',
+                    },
+                    boxShadow: {
+                        'custom': '0 4px 15px rgba(0, 0, 0, 0.05)',
+                        'xl-custom': '0 25px 50px -12px rgba(0, 0, 0, 0.08), 0 10px 20px -5px rgba(0, 0, 0, 0.02)',
+                        'card-purple': '0 8px 16px -4px rgba(85, 52, 165, 0.15)',
+                        'card-hover-glow': '0 0 15px rgba(85, 52, 165, 0.3)',
+                    },
+                    borderRadius: {
+                        'xl-2xl': '1.5rem',
+                        'lg-xl': '1rem',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e2e8f0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        /* Pastikan item aktif tetap bergaya aktif saat di-hover */
+        .sidebar-menu-item.active:hover {
+            background-color: #5534A5; /* primary-purple (tetap ungu) */
+            color: white; /* teks tetap putih */
+            box-shadow: 0 4px 12px rgba(85, 52, 165, 0.4); /* Opsional: sedikit lebih gelap/shadow lebih kuat saat di-hover aktif */
+            /* Pastikan transform tetap sama atau atur jika ada perubahan spesifik saat hover aktif */
+            transform: translateX(5px);
+        }
+
+        /* Jika Anda memiliki sub-menu item yang aktif, terapkan juga hal serupa */
+        .submenu-item.active:hover {
+            background-color: #DED7ED; /* soft-purple (tetap soft-purple) */
+            color: #5534A5; /* primary-purple (teks tetap ungu) */
+        }
+        /* Custom active link styling for main menu items */
+        .sidebar-menu-item {
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            will-change: background-color, transform; /* Optimasi rendering */
+        }
+
+        .sidebar-menu-item.active {
+            background-color: #5534A5; /* primary-purple */
+            color: white;
+            box-shadow: 0 4px 8px rgba(85, 52, 165, 0.3); /* Subtle shadow for active */
+            transform: translateX(5px); /* Slight shift to the right */
+            border-radius: 0.5rem; /* Match p-3 rounded-lg */
+        }
+        .sidebar-menu-item.active svg {
+            color: white;
+        }
+        .sidebar-menu-item.active .menu-arrow {
+            transform: rotate(90deg);
+        }
+
+        /* Custom active link styling for sub-menu items */
+        .submenu-item.active {
+            font-weight: 600; /* Semi-bold */
+            color: #5534A5; /* primary-purple */
+            background-color: #DED7ED; /* soft-purple */
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans text-gray-800">
+
+    <div class="flex min-h-screen">
+
+        <aside class="w-64 bg-white text-gray-700 shadow-lg flex flex-col fixed h-full z-30 border-r border-gray-200">
+            <div class="p-6 text-2xl font-bold text-center border-b border-gray-200 flex items-center justify-center">
+                <img src="https://picsum.photos/id/1011/200/200" alt="Logbook Icon" class="h-8 w-8 mr-2 text-primary-purple"> <span class="text-primary-purple">Logbook</span> Dev
+            </div>
+            <nav class="flex-1 px-4 py-6 overflow-y-auto">
+                <div class="space-y-2">
+                    <a href="#" class="sidebar-menu-item flex items-center p-3 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-primary-purple transition-all duration-200 ease-in-out group" data-menu="dashboard">
+                        <svg class="w-5 h-5 mr-3 text-gray-500 group-[.active]:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                        <span>Dashboard</span>
+                    </a>
+
+                    <div class="relative">
+                        <button class="sidebar-menu-item flex items-center justify-between w-full p-3 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-primary-purple transition-all duration-200 ease-in-out group" data-menu="my-tasks">
+                            <span class="flex items-center">
+                                <svg class="w-5 h-5 mr-3 text-gray-500 group-[.active]:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span class="group-[.active]:text-white">Task Saya</span>
+                            </span>
+                            <svg class="w-4 h-4 text-gray-500 transition-transform duration-200 menu-arrow group-[.active]:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                        <div class="submenu hidden mt-1 pl-8 space-y-1">
+                            <a href="#" class="submenu-item block p-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50 hover:text-primary-purple transition-colors duration-200" data-submenu="my-tasks-all">Semua Task</a>
+                            <a href="#" class="submenu-item block p-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50 hover:text-primary-purple transition-colors duration-200" data-submenu="my-tasks-ongoing">Task Berjalan</a>
+                            <a href="#" class="submenu-item block p-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50 hover:text-primary-purple transition-colors duration-200" data-submenu="my-tasks-completed">Task Selesai</a>
+                            <a href="#" class="submenu-item block p-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50 hover:text-primary-purple transition-colors duration-200" data-submenu="my-tasks-late">Task Terlambat</a>
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <button class="sidebar-menu-item flex items-center justify-between w-full p-3 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-primary-purple transition-all duration-200 ease-in-out group" data-menu="code-review">
+                            <span class="flex items-center">
+                                <svg class="w-5 h-5 mr-3 text-gray-500 group-[.active]:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                                <span class="group-[.active]:text-white">Code & Review</span>
+                            </span>
+                            <svg class="w-4 h-4 text-gray-500 transition-transform duration-200 menu-arrow group-[.active]:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                        <div class="submenu hidden mt-1 pl-8 space-y-1">
+                            <a href="#" class="submenu-item block p-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50 hover:text-primary-purple transition-colors duration-200" data-submenu="code-review-pull">Pull Requests</a>
+                            <a href="#" class="submenu-item block p-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50 hover:text-primary-purple transition-colors duration-200" data-submenu="code-review-commits">Riwayat Commits</a>
+                            <a href="#" class="submenu-item block p-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50 hover:text-primary-purple transition-colors duration-200" data-submenu="code-review-branches">Branches Aktif</a>
+                        </div>
+                    </div>
+
+                    <a href="#" class="sidebar-menu-item flex items-center p-3 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-primary-purple transition-all duration-200 ease-in-out group" data-menu="bug-tracker">
+                        <svg class="w-5 h-5 mr-3 text-gray-500 group-[.active]:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span>Tracker Bug</span>
+                    </a>
+                    <a href="#" class="sidebar-menu-item flex items-center p-3 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-primary-purple transition-all duration-200 ease-in-out group" data-menu="settings">
+                        <svg class="w-5 h-5 mr-3 text-gray-500 group-[.active]:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <span>Pengaturan</span>
+                    </a>
+                </div>
+            </nav>
+            <div class="p-4 border-t border-gray-200 text-gray-500 text-sm">
+                <p>&copy; 2025 Logbook Dev.</p>
+            </div>
+        </aside>
+
+        <div class="flex-1 flex flex-col ml-64">
+
+            <header class="bg-white shadow-custom p-4 flex items-center justify-between sticky top-0 z-20 border-b border-gray-200">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-semibold text-gray-800">Dashboard Programmer</h1>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <div class="relative hidden md:block">
+                        <input type="text" placeholder="Cari..." class="pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-primary-purple transition-all duration-200">
+                        <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+
+                    <button class="relative p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors duration-200">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                        <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">5</span>
+                    </button>
+
+                    <div class="relative group">
+                        <button class="flex items-center space-x-2 focus:outline-none">
+                            <div class="relative">
+                                <img class="w-9 h-9 rounded-full object-cover border-2 border-primary-purple" src="https://picsum.photos/id/1011/200/200" alt="User Profile">
+                                <span class="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full bg-green-500 ring-2 ring-white"></span>
+                            </div>
+                            <span class="hidden md:block font-medium text-gray-700">Jane Smith</span>
+                            <svg class="w-4 h-4 text-gray-500 hidden md:block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profil Saya</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Pengaturan</a>
+                            <div class="border-t border-gray-100"></div>
+                            <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50">Keluar</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="flex-1 p-6 overflow-y-auto">
+                <div class="container mx-auto max-w-7xl">
+
+                    <div class="relative bg-gradient-to-br from-primary-purple to-light-purple p-8 rounded-xl-2xl shadow-xl-custom mb-8 flex items-center justify-between flex-wrap gap-4 text-white overflow-hidden">
+                        <div class="absolute inset-0 opacity-10 bg-no-repeat bg-center bg-cover" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzUiIGhlaWdodD0iNzUiIHZpZXdCb3g9IjAgMCA3NSA3NSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzcuNSIgY3k9IjM3LjUiIHI9IjM3LjUiIGZpbGw9IiNGRkZGRkYiIGZpbGwtb3BhY2VpdHk9IjAuMiIvPgo8cGF0aCBkPSJNIDM3LjUgMCBDMTYuODA3OSAwIDAgMTYuODA3OSAwIDM3LjUgQyAwIDU4LjE5MjEgMTYuODA3OSA3NSAzNy41IDc1IEM1OC4xOTIxIDc1IDc1IDU4LjE5MjEgNzUgMzcuNSBDNzUgMTYuODA3OSA1OC4xOTIxIDAgMzcuNSA3LjVaIiBmaWxsPSJ3aGl0ZSIgZmlsbC1vcGFjaXR5PSIwLjEiLz4KPC9zdmc+'); transform: scale(3) translate(20%, -20%);"></div>
+
+                        <div class="flex items-center space-x-6 z-10">
+                            <div class="relative">
+                                <img class="w-32 h-32 rounded-full border-4 border-white object-cover shadow-lg" src="https://picsum.photos/id/1011/200/200" alt="Profile Picture">
+                                <span class="absolute bottom-2 right-2 block h-5 w-5 rounded-full bg-green-400 ring-4 ring-white"></span>
+                            </div>
+                            <div>
+                                <p class="text-4xl font-extrabold">Jane Smith</p>
+                                <p class="text-xl font-light opacity-90 mt-1">Lead Frontend Developer</p>
+                                <p class="text-lg opacity-80 mt-2">Yogyakarta, Indonesia</p>
+                                <p class="text-md opacity-70">NIP: 0987654321</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                        <div class="group relative bg-white p-5 rounded-lg-xl shadow-card-purple text-gray-800 flex items-center space-x-4
+                                    transform hover:-translate-y-1 hover:shadow-card-hover-glow transition-all duration-300 ease-in-out cursor-pointer border border-gray-100">
+                            <div class="flex-shrink-0 p-3 rounded-full bg-primary-purple text-white">
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                            </div>
+                            <div>
+                                <p class="text-3xl font-extrabold text-primary-purple">5</p>
+                                <p class="text-md font-semibold text-gray-600">Task Aktif</p>
+                            </div>
+                        </div>
+
+                        <div class="group relative bg-white p-5 rounded-lg-xl shadow-card-purple text-gray-800 flex items-center space-x-4
+                                    transform hover:-translate-y-1 hover:shadow-card-hover-glow transition-all duration-300 ease-in-out cursor-pointer border border-gray-100">
+                            <div class="flex-shrink-0 p-3 rounded-full bg-accent-red text-white">
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            </div>
+                            <div>
+                                <p class="text-3xl font-extrabold text-accent-red">3</p>
+                                <p class="text-md font-semibold text-gray-600">Task Terlambat</p>
+                            </div>
+                        </div>
+
+                        <div class="group relative bg-white p-5 rounded-lg-xl shadow-card-purple text-gray-800 flex items-center space-x-4
+                                    transform hover:-translate-y-1 hover:shadow-card-hover-glow transition-all duration-300 ease-in-out cursor-pointer border border-gray-100">
+                            <div class="flex-shrink-0 p-3 rounded-full bg-accent-green text-white">
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"></path></svg>
+                            </div>
+                            <div>
+                                <p class="text-3xl font-extrabold text-accent-green">1</p>
+                                <p class="text-md font-semibold text-gray-600">Task Diproses</p>
+                            </div>
+                        </div>
+
+                        <div class="group relative bg-white p-5 rounded-lg-xl shadow-card-purple text-gray-800 flex items-center space-x-4
+                                    transform hover:-translate-y-1 hover:shadow-card-hover-glow transition-all duration-300 ease-in-out cursor-pointer border border-gray-100">
+                            <div class="flex-shrink-0 p-3 rounded-full bg-accent-yellow text-white">
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18s-3.332.477-4.5 1.253"></path></svg>
+                            </div>
+                            <div>
+                                <p class="text-3xl font-extrabold text-accent-yellow">2</p>
+                                <p class="text-md font-semibold text-gray-600">Task Selesai</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl-2xl shadow-custom border border-gray-100 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">Tugas Mendesak & Bug Prioritas</h2>
+                        <ul class="space-y-4">
+                            <li class="flex items-center bg-red-50 p-3 rounded-lg border border-red-200">
+                                <svg class="w-6 h-6 text-red-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2A9 9 0 111 12a9 9 0 0118 0z"></path></svg>
+                                <div>
+                                    <p class="font-medium text-gray-800">BUG: Login Error pada Mobile App</p>
+                                    <p class="text-sm text-gray-600">Modul: Authentication - Prioritas: Kritikal</p>
+                                </div>
+                            </li>
+                            <li class="flex items-center bg-yellow-50 p-3 rounded-lg border border-yellow-200">
+                                <svg class="w-6 h-6 text-yellow-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                <div>
+                                    <p class="font-medium text-gray-800">Task: Implementasi Fitur Filter Data</p>
+                                    <p class="text-sm text-gray-600">Proyek: X - Deadline: 05 Juli 2025</p>
+                                </div>
+                            </li>
+                            <li class="flex items-center bg-blue-50 p-3 rounded-lg border border-blue-200">
+                                <svg class="w-6 h-6 text-blue-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z"></path></svg>
+                                <div>
+                                    <p class="font-medium text-gray-800">Review Code untuk Modul Laporan</p>
+                                    <p class="text-sm text-gray-600">Requested by: Lead Dev - Branch: feature/reports</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl-2xl shadow-custom border border-gray-100">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">Status Task Programmer</h2>
+                        <div class="space-y-6">
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-lg font-medium text-gray-700">Task Selesai</span>
+                                    <span class="text-lg font-bold text-accent-green">65%</span>
+                                </div>
+                                <div class="w-full bg-soft-purple rounded-full h-4">
+                                    <div class="bg-accent-green h-4 rounded-full" style="width:65%;"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-lg font-medium text-gray-700">Task Belum Selesai</span>
+                                    <span class="text-lg font-bold text-dark-purple">25%</span>
+                                </div>
+                                <div class="w-full bg-light-purple rounded-full h-4">
+                                    <div class="bg-dark-purple h-4 rounded-full" style="width:25%;"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-lg font-medium text-gray-700">Task Terlambat</span>
+                                    <span class="text-lg font-bold text-accent-red">10%</span>
+                                </div>
+                                <div class="w-full bg-soft-purple rounded-full h-4">
+                                    <div class="bg-accent-red h-4 rounded-full" style="width:10%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuItems = document.querySelectorAll('.sidebar-menu-item');
+            const submenus = document.querySelectorAll('.submenu');
+
+            function toggleSubmenu(button) {
+                const submenu = button.nextElementSibling;
+                if (submenu && submenu.classList.contains('submenu')) {
+                    submenu.classList.toggle('hidden');
+                    button.classList.toggle('active'); // Apply active class to the parent menu item for arrow rotation
+                }
+            }
+
+            function setActiveLink(clickedLink) {
+                // Remove active from all main menu items
+                menuItems.forEach(item => {
+                    item.classList.remove('active', 'bg-primary-purple', 'text-white');
+                    item.querySelectorAll('svg').forEach(svg => {
+                        svg.classList.remove('text-white');
+                        svg.classList.add('text-gray-500');
+                    });
+                    if (item.tagName === 'BUTTON') { // Ensure arrow resets for collapsed menus
+                        item.querySelector('.menu-arrow').classList.remove('rotate-90');
+                    }
+                });
+
+                // Remove active from all submenu items
+                document.querySelectorAll('.submenu-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+
+                // If a sub-menu item was clicked
+                if (clickedLink.classList.contains('submenu-item')) {
+                    clickedLink.classList.add('active');
+                    // Find the parent menu item and activate it
+                    let parentButton = clickedLink.closest('.relative').querySelector('.sidebar-menu-item');
+                    if (parentButton) {
+                        parentButton.classList.add('active', 'bg-primary-purple', 'text-white');
+                        parentButton.querySelectorAll('svg').forEach(svg => {
+                            svg.classList.add('text-white');
+                            svg.classList.remove('text-gray-500');
+                        });
+                        parentButton.querySelector('.menu-arrow').classList.add('rotate-90'); // Ensure arrow rotates for active parent
+                        parentButton.nextElementSibling.classList.remove('hidden'); // Ensure submenu is open
+                    }
+                } else { // If a main menu item was clicked (non-submenu parent or direct link)
+                    clickedLink.classList.add('active', 'bg-primary-purple', 'text-white');
+                    clickedLink.querySelectorAll('svg').forEach(svg => {
+                        svg.classList.add('text-white');
+                        svg.classList.remove('text-gray-500');
+                    });
+                }
+            }
+
+            // Event Listeners
+            menuItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault(); // Prevent default link behavior
+                    if (this.tagName === 'BUTTON') {
+                        toggleSubmenu(this);
+                    }
+                    setActiveLink(this);
+                });
+            });
+
+            submenus.forEach(submenu => {
+                submenu.querySelectorAll('.submenu-item').forEach(subItem => {
+                    subItem.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        setActiveLink(this);
+                    });
+                });
+            });
+
+            // Set initial active state (e.g., Dashboard)
+            const initialActiveLink = document.querySelector('.sidebar-menu-item[data-menu="dashboard"]');
+            if (initialActiveLink) {
+                setActiveLink(initialActiveLink);
+            }
+        });
+    </script>
+
+</body>
+</html>
