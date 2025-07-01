@@ -1,0 +1,155 @@
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #e2e8f0;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Custom active link styling for main menu items */
+.sidebar-menu-item {
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    will-change: background-color, transform;
+    /* Optimasi rendering */
+}
+
+.sidebar-menu-item.active {
+    background-color: #5534A5;
+    /* primary-purple */
+    color: white;
+    box-shadow: 0 4px 8px rgba(85, 52, 165, 0.3);
+    /* Subtle shadow for active */
+    transform: translateX(5px);
+    /* Slight shift to the right */
+    border-radius: 0.5rem;
+    /* Match p-3 rounded-lg */
+}
+
+.sidebar-menu-item.active svg {
+    color: white;
+}
+
+.sidebar-menu-item.active .menu-arrow {
+    transform: rotate(90deg);
+}
+
+/* Pastikan item aktif tetap bergaya aktif saat di-hover */
+.sidebar-menu-item.active:hover {
+    background-color: #5534A5;
+    /* primary-purple (tetap ungu) */
+    color: white;
+    /* teks tetap putih */
+    box-shadow: 0 4px 12px rgba(85, 52, 165, 0.4);
+    /* Opsional: sedikit lebih gelap/shadow lebih kuat saat di-hover aktif */
+    transform: translateX(5px);
+}
+
+/* Custom active link styling for sub-menu items */
+.submenu-item.active {
+    font-weight: 600;
+    /* Semi-bold */
+    color: #5534A5;
+    /* primary-purple */
+    background-color: #DED7ED;
+    /* soft-purple */
+    border-radius: 0.5rem;
+}
+
+.submenu-item.active:hover {
+    background-color: #DED7ED;
+    /* soft-purple (tetap soft-purple) */
+    color: #5534A5;
+    /* primary-purple (teks tetap ungu) */
+}
+
+/* Styling for when sidebar is hidden */
+body.sidebar-hidden .flex-1.flex-col {
+    margin-left: 0 !important;
+    /* Override md:ml-64 */
+}
+
+body.sidebar-hidden #sidebar {
+    transform: translateX(-100%);
+}
+
+
+
+@media (prefers-color-scheme: dark) {
+    .dark\:even\:bg-gray-900\/50:nth-child(even) {
+        background-color: rgb(249 250 251 / var(--tw-bg-opacity, 1)) !important;
+    }
+}
+
+/* --- New Active and Open States --- */
+
+/* Style for the active menu item */
+.active-link {
+    color: #8b5cf6;
+    /* purple-700 */
+    background-color: #f3e8ff;
+    /* purple-100 */
+    font-weight: 600;
+    /* font-semibold */
+}
+
+/* Styles for dropdown parent when one of its children is active */
+.active-open>a {
+    color: #8b5cf6;
+    /* purple-700 */
+    background-color: #f3e8ff;
+    /* purple-100 */
+    font-weight: 600;
+    /* font-semibold */
+}
+
+/* Ensure the dropdown opens when the parent has active-open class */
+/* This will now be handled by Alpine.js transitions and the `height` property */
+.active-open ul {
+    /* This rule might not be strictly necessary anymore depending on Alpine.js's rendering,
+       but it's good to keep in mind for general CSS behavior. */
+    /* display: block; */
+}
+
+/* Add custom height properties for Alpine.js transitions */
+.height-0 {
+    height: 0;
+}
+
+.height-full {
+    height: auto;
+    /* This will be calculated by the browser based on content */
+}
+
+nav li a:not(.active-link):not(.active-open > a):hover {
+    background-color: #f3f4f6;
+    /* gray-100 */
+    color: #8b5cf6;
+    /* purple-700 */
+}
+
+/* Optional: Hover style for sub-menu items */
+.pl-8 a:not(.active-link):hover {
+    background-color: #f3f4f6;
+    /* gray-100 */
+    color: #8b5cf6;
+    /* purple-700 */
+}
+
+.custom-floating-dropdown {
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+        0 2px 4px -2px rgb(0 0 0 / 0.1);
+    min-width: 10rem;
+    padding: 0.5rem 0;
+}

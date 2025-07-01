@@ -47,18 +47,11 @@ Route::prefix('master')->name('master.')->group(function () {
     Route::get('/urgensi', function () {
         return view('master.urgensi');
     })->name('urgensi');
+    Route::get('/hari_libur', function () {
+        return view('master.hari_libur');
+    })->name('hari_libur');
 });
 
-// Support group
-Route::prefix('support')->name('support.')->group(function () {
-    Route::get('/bantuan', function () {
-        return view('support.bantuan');
-    })->name('bantuan');
-
-    Route::get('/faq', function () {
-        return view('support.faq');
-    })->name('faq');
-});
 
 // Tasklists group
 Route::prefix('tasklist')->name('tasklist.')->group(function () {
@@ -96,6 +89,12 @@ Route::prefix('report')->name('report.')->group(function () {
     Route::get('/task_pegawai', function () {
         return view('report.task_pegawai');
     })->name('task_pegawai');
+    Route::get('/project_presentage', function () {
+        return view('report.project_presentage');
+    })->name('project_presentage');
+    Route::get('/gantt_chart', function () {
+        return view('report.gantt_chart');
+    })->name('gantt_chart');
 });
 
 // Settings

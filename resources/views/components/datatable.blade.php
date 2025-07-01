@@ -1,12 +1,12 @@
 @props(['id' => 'datatable', 'disableOrderColumn' => null])
 <div class="bg-white rounded-lg shadow-md p-6 pt-2">
-    <div class="flex flex-col md:flex-row justify-between items-center mb-4 space-y-3 md:space-y-0">
+    <div class="flex flex-row justify-between items-center mb-4 space-y-3 md:space-y-0">
         <div id="entriesPerPageContainer" class="flex items-center space-x-2"></div>
         <div id="dataTableSearchContainer" class="relative flex-grow md:flex-grow-0 w-full md:w-auto"></div>
     </div>
 
-    <div class="overflow-x-auto">
-        <table id="{{ $id ?? 'datatable' }}" class="w-full text-left text-gray-500">
+    <div class="overflow-x-auto rounded">
+        <table id="{{ $id ?? 'datatable' }}" class="table-auto min-w-full text-left text-gray-500">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                 <tr>
                     {{ $thead }}
