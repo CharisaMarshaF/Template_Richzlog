@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Logbook Project Manager</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Logbook Project Manager</title> <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -90,6 +89,14 @@
             background-color: #DED7ED; /* soft-purple (tetap soft-purple) */
             color: #5534A5; /* primary-purple (teks tetap ungu) */
         }
+
+        /* Styling for when sidebar is hidden */
+        body.sidebar-hidden .flex-1.flex-col {
+            margin-left: 0 !important; /* Override md:ml-64 */
+        }
+        body.sidebar-hidden #sidebar {
+            transform: translateX(-100%);
+        }
     </style>
 </head>
 <body class="bg-gray-100 font-sans text-gray-800">
@@ -98,8 +105,8 @@
 
         <aside id="sidebar" class="w-64 bg-white text-gray-700 shadow-lg flex flex-col fixed h-full z-30 border-r border-gray-200
                       transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
-            <div class="p-6 text-2xl font-bold text-center border-b border-gray-200 flex items-center justify-center">
-                <img src="https://www.svgrepo.com/show/521743/logbook.svg" alt="Logbook Icon" class="h-8 w-8 mr-2 text-primary-purple">
+            <div class="p-6 text-2xl font-bold text-center  flex items-center justify-center">
+                <img src="https://picsum.photos/id/1005/200/200" alt="Logbook Icon" class="h-8 w-8 mr-2 text-primary-purple">
                 <span class="text-primary-purple">Logbook</span> PM
             </div>
             <nav class="flex-1 px-4 py-6 overflow-y-auto">
@@ -156,15 +163,14 @@
 
         <div id="sidebar-overlay" class="fixed inset-0 bg-black opacity-50 z-20 hidden md:hidden"></div>
 
-        <div class="flex-1 flex flex-col md:ml-64">
+        <div id="main-content-wrapper" class="flex-1 flex flex-col md:ml-64 transition-all duration-300 ease-in-out">
 
             <header class="bg-white shadow-custom p-4 flex items-center justify-between sticky top-0 z-20 border-b border-gray-200">
                 <div class="flex items-center">
-                    <button id="menu-toggle" class="md:hidden p-2 mr-3 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-purple">
+                    <button id="menu-toggle" class="p-2 mr-3 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-purple">
                         <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                     </button>
-                    <h1 class="text-xl font-semibold text-gray-800">Dashboard PM</h1>
-                </div>
+                    </div>
 
                 <div class="flex items-center space-x-2 sm:space-x-4">
                     <div class="relative hidden sm:block">
@@ -338,6 +344,8 @@
             const sidebar = document.getElementById('sidebar');
             const menuToggle = document.getElementById('menu-toggle');
             const sidebarOverlay = document.getElementById('sidebar-overlay');
+            const mainContentWrapper = document.getElementById('main-content-wrapper');
+            const body = document.body;
 
             function toggleSubmenu(button) {
                 const submenu = button.nextElementSibling;
@@ -419,24 +427,64 @@
                 setActiveLink(initialActiveLink);
             }
 
-            // Mobile menu toggle
+            // Toggle sidebar visibility and main content width
             menuToggle.addEventListener('click', () => {
-                sidebar.classList.toggle('-translate-x-full');
-                sidebarOverlay.classList.toggle('hidden');
+                const isSidebarHidden = sidebar.classList.contains('-translate-x-full');
+
+                if (isSidebarHidden) {
+                    // Show sidebar
+                    sidebar.classList.remove('-translate-x-full');
+                    mainContentWrapper.classList.add('md:ml-64'); // Re-add margin for desktop
+                    body.classList.remove('sidebar-hidden'); // Remove full width class
+                    if (window.innerWidth < 768) { // For mobile overlay
+                        sidebarOverlay.classList.remove('hidden');
+                    }
+                } else {
+                    // Hide sidebar
+                    sidebar.classList.add('-translate-x-full');
+                    mainContentWrapper.classList.remove('md:ml-64'); // Remove margin for desktop
+                    body.classList.add('sidebar-hidden'); // Add full width class
+                    if (window.innerWidth < 768) { // For mobile overlay
+                        sidebarOverlay.classList.add('hidden');
+                    }
+                }
             });
+
 
             sidebarOverlay.addEventListener('click', () => {
                 sidebar.classList.add('-translate-x-full');
                 sidebarOverlay.classList.add('hidden');
+                mainContentWrapper.classList.remove('md:ml-64');
+                body.classList.add('sidebar-hidden');
             });
 
-            // Close sidebar if window resized to desktop
+            // Adjust sidebar visibility and main content width on window resize
             window.addEventListener('resize', () => {
                 if (window.innerWidth >= 768) { // md breakpoint
+                    // On desktop, ensure sidebar is visible and content takes margin
                     sidebar.classList.remove('-translate-x-full');
                     sidebarOverlay.classList.add('hidden');
+                    mainContentWrapper.classList.add('md:ml-64');
+                    body.classList.remove('sidebar-hidden');
+                } else {
+                    // On mobile, hide sidebar by default
+                    sidebar.classList.add('-translate-x-full');
+                    // Overlay should only be shown when sidebar is explicitly opened on mobile
+                    sidebarOverlay.classList.add('hidden');
+                    mainContentWrapper.classList.remove('md:ml-64');
+                    body.classList.remove('sidebar-hidden'); // Ensure no lingering sidebar-hidden class from desktop
                 }
             });
+
+            // Initial check on load for desktop view
+            if (window.innerWidth >= 768) {
+                sidebar.classList.remove('-translate-x-full');
+                mainContentWrapper.classList.add('md:ml-64');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                mainContentWrapper.classList.remove('md:ml-64');
+                body.classList.remove('sidebar-hidden');
+            }
         });
     </script>
 

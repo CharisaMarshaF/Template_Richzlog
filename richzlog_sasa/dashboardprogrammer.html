@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Logbook Programmer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Logbook Programmer</title> <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'primary-purple': '#5534A5',
+                        'primary-purple': '#5534A5', /* Kembali ke ungu */
                         'dark-purple': '#3B2476',
                         'light-purple': '#7D62BA',
                         'soft-purple': '#DED7ED',
@@ -25,8 +24,8 @@
                     boxShadow: {
                         'custom': '0 4px 15px rgba(0, 0, 0, 0.05)',
                         'xl-custom': '0 25px 50px -12px rgba(0, 0, 0, 0.08), 0 10px 20px -5px rgba(0, 0, 0, 0.02)',
-                        'card-purple': '0 8px 16px -4px rgba(85, 52, 165, 0.15)',
-                        'card-hover-glow': '0 0 15px rgba(85, 52, 165, 0.3)',
+                        'card-purple': '0 8px 16px -4px rgba(85, 52, 165, 0.15)', /* Kembali ke ungu */
+                        'card-hover-glow': '0 0 15px rgba(85, 52, 165, 0.3)', /* Kembali ke ungu */
                     },
                     borderRadius: {
                         'xl-2xl': '1.5rem',
@@ -90,6 +89,14 @@
             background-color: #DED7ED; /* soft-purple (tetap soft-purple) */
             color: #5534A5; /* primary-purple (teks tetap ungu) */
         }
+
+        /* Styling for when sidebar is hidden */
+        body.sidebar-hidden .flex-1.flex-col {
+            margin-left: 0 !important; /* Override md:ml-64 */
+        }
+        body.sidebar-hidden #sidebar {
+            transform: translateX(-100%);
+        }
     </style>
 </head>
 <body class="bg-gray-100 font-sans text-gray-800">
@@ -98,7 +105,7 @@
 
         <aside id="sidebar" class="w-64 bg-white text-gray-700 shadow-lg flex flex-col fixed h-full z-30 border-r border-gray-200
                       transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
-            <div class="p-6 text-2xl font-bold text-center border-b border-gray-200 flex items-center justify-center">
+            <div class="p-6 text-2xl font-bold text-center  flex items-center justify-center">
                 <img src="https://www.svgrepo.com/show/521743/logbook.svg" alt="Logbook Icon" class="h-8 w-8 mr-2 text-primary-purple">
                 <span class="text-primary-purple">Logbook</span> Dev
             </div>
@@ -110,39 +117,38 @@
                     </a>
 
                     <div class="relative">
-                        <button class="sidebar-menu-item flex items-center justify-between w-full p-3 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-primary-purple transition-all duration-200 ease-in-out group" data-menu="my-tasks">
+                        <button class="sidebar-menu-item flex items-center justify-between w-full p-3 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-primary-purple transition-all duration-200 ease-in-out group" data-menu="modul">
                             <span class="flex items-center">
-                                <svg class="w-5 h-5 mr-3 text-gray-500 group-[.active]:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                <span class="group-[.active]:text-white">Task Saya</span>
+                                <svg class="w-5 h-5 mr-3 text-gray-500 group-[.active]:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2m3 10V7"></path></svg>
+                                <span class="group-[.active]:text-white">Modul</span>
                             </span>
                             <svg class="w-4 h-4 text-gray-500 transition-transform duration-200 menu-arrow group-[.active]:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                         </button>
                         <div class="submenu hidden mt-1 pl-8 space-y-1">
-                            <a href="#" class="submenu-item block p-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50 hover:text-primary-purple transition-colors duration-200" data-submenu="my-tasks-all">Semua Task</a>
-                            <a href="#" class="submenu-item block p-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50 hover:text-primary-purple transition-colors duration-200" data-submenu="my-tasks-ongoing">Task Berjalan</a>
-                            <a href="#" class="submenu-item block p-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50 hover:text-primary-purple transition-colors duration-200" data-submenu="my-tasks-completed">Task Selesai</a>
-                            <a href="#" class="submenu-item block p-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50 hover:text-primary-purple transition-colors duration-200" data-submenu="my-tasks-late">Task Terlambat</a>
+                            <a href="#" class="submenu-item block p-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50 hover:text-primary-purple transition-colors duration-200" data-submenu="modul-all">Semua Modul</a>
+                            <a href="#" class="submenu-item block p-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50 hover:text-primary-purple transition-colors duration-200" data-submenu="modul-active">Modul Aktif</a>
+                            <a href="#" class="submenu-item block p-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50 hover:text-primary-purple transition-colors duration-200" data-submenu="modul-completed">Modul Selesai</a>
                         </div>
                     </div>
 
                     <div class="relative">
-                        <button class="sidebar-menu-item flex items-center justify-between w-full p-3 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-primary-purple transition-all duration-200 ease-in-out group" data-menu="code-review">
+                        <button class="sidebar-menu-item flex items-center justify-between w-full p-3 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-primary-purple transition-all duration-200 ease-in-out group" data-menu="tasklist">
                             <span class="flex items-center">
-                                <svg class="w-5 h-5 mr-3 text-gray-500 group-[.active]:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
-                                <span class="group-[.active]:text-white">Code & Review</span>
+                                <svg class="w-5 h-5 mr-3 text-gray-500 group-[.active]:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                                <span class="group-[.active]:text-white">Tasklist</span>
                             </span>
                             <svg class="w-4 h-4 text-gray-500 transition-transform duration-200 menu-arrow group-[.active]:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                         </button>
                         <div class="submenu hidden mt-1 pl-8 space-y-1">
-                            <a href="#" class="submenu-item block p-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50 hover:text-primary-purple transition-colors duration-200" data-submenu="code-review-pull">Pull Requests</a>
-                            <a href="#" class="submenu-item block p-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50 hover:text-primary-purple transition-colors duration-200" data-submenu="code-review-commits">Riwayat Commits</a>
-                            <a href="#" class="submenu-item block p-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50 hover:text-primary-purple transition-colors duration-200" data-submenu="code-review-branches">Branches Aktif</a>
+                            <a href="#" class="submenu-item block p-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50 hover:text-primary-purple transition-colors duration-200" data-submenu="task-all">Semua Task</a>
+                            <a href="#" class="submenu-item block p-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50 hover:text-primary-purple transition-colors duration-200" data-submenu="task-ongoing">Task Berjalan</a>
+                            <a href="#" class="submenu-item block p-2 rounded-lg text-sm text-gray-600 hover:bg-gray-50 hover:text-primary-purple transition-colors duration-200" data-submenu="task-due">Task Mendekati Deadline</a>
                         </div>
                     </div>
 
-                    <a href="#" class="sidebar-menu-item flex items-center p-3 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-primary-purple transition-all duration-200 ease-in-out group" data-menu="bug-tracker">
-                        <svg class="w-5 h-5 mr-3 text-gray-500 group-[.active]:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        <span>Tracker Bug</span>
+                    <a href="#" class="sidebar-menu-item flex items-center p-3 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-primary-purple transition-all duration-200 ease-in-out group" data-menu="project">
+                        <svg class="w-5 h-5 mr-3 text-gray-500 group-[.active]:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
+                        <span>Project</span>
                     </a>
                     <a href="#" class="sidebar-menu-item flex items-center p-3 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-primary-purple transition-all duration-200 ease-in-out group" data-menu="settings">
                         <svg class="w-5 h-5 mr-3 text-gray-500 group-[.active]:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
@@ -157,15 +163,14 @@
 
         <div id="sidebar-overlay" class="fixed inset-0 bg-black opacity-50 z-20 hidden md:hidden"></div>
 
-        <div class="flex-1 flex flex-col md:ml-64">
+        <div id="main-content-wrapper" class="flex-1 flex flex-col md:ml-64 transition-all duration-300 ease-in-out">
 
             <header class="bg-white shadow-custom p-4 flex items-center justify-between sticky top-0 z-20 border-b border-gray-200">
                 <div class="flex items-center">
-                    <button id="menu-toggle" class="md:hidden p-2 mr-3 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-purple">
+                    <button id="menu-toggle" class="p-2 mr-3 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-purple">
                         <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                     </button>
-                    <h1 class="text-xl font-semibold text-gray-800">Dashboard Programmer</h1>
-                </div>
+                    </div>
 
                 <div class="flex items-center space-x-2 sm:space-x-4">
                     <div class="relative hidden sm:block">
@@ -175,13 +180,13 @@
 
                     <button class="relative p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors duration-200">
                         <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
-                        <span class="absolute top-0 right-0 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">5</span>
+                        <span class="absolute top-0 right-0 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">3</span>
                     </button>
 
                     <div class="relative group">
                         <button class="flex items-center space-x-2 focus:outline-none">
                             <div class="relative">
-                                <img class="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover border-2 border-primary-purple" src="https://picsum.photos/id/1011/200/200" alt="User Profile">
+                                <img class="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover border-2 border-primary-purple" src="https://picsum.photos/id/1005/200/200" alt="User Profile">
                                 <span class="absolute bottom-0 right-0 block h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-green-500 ring-1 ring-white sm:ring-2"></span>
                             </div>
                             <span class="hidden md:block font-medium text-gray-700 text-sm">Jane Smith</span>
@@ -205,13 +210,13 @@
 
                         <div class="flex flex-col md:flex-row items-center md:space-x-6 space-y-4 md:space-y-0 z-10">
                             <div class="relative">
-                                <img class="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-white object-cover shadow-lg" src="https://picsum.photos/id/1011/200/200" alt="Profile Picture">
+                                <img class="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-white object-cover shadow-lg" src="https://picsum.photos/id/1005/200/200" alt="Profile Picture">
                                 <span class="absolute bottom-1 right-1 md:bottom-2 md:right-2 block h-4 w-4 md:h-5 md:w-5 rounded-full bg-green-400 ring-2 ring-white md:ring-4"></span>
                             </div>
                             <div>
                                 <p class="text-3xl md:text-4xl font-extrabold">Jane Smith</p>
-                                <p class="text-lg md:text-xl font-light opacity-90 mt-0 md:mt-1">Lead Frontend Developer</p>
-                                <p class="text-md md:text-lg opacity-80 mt-1 md:mt-2">Yogyakarta, Indonesia</p>
+                                <p class="text-lg md:text-xl font-light opacity-90 mt-0 md:mt-1">Programmer</p>
+                                <p class="text-md md:text-lg opacity-80 mt-1 md:mt-2">Karanganyar, Central Java, Indonesia</p>
                                 <p class="text-sm md:text-md opacity-70">NIP: 0987654321</p>
                             </div>
                         </div>
@@ -221,106 +226,107 @@
                         <div class="group relative bg-white p-4 md:p-5 rounded-lg-xl shadow-card-purple text-gray-800 flex items-center space-x-3 md:space-x-4
                                     transform hover:-translate-y-1 hover:shadow-card-hover-glow transition-all duration-300 ease-in-out cursor-pointer border border-gray-100">
                             <div class="flex-shrink-0 p-2 md:p-3 rounded-full bg-primary-purple text-white">
-                                <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                                <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                             </div>
                             <div>
-                                <p class="text-2xl md:text-3xl font-extrabold text-primary-purple">5</p>
-                                <p class="text-sm md:text-md font-semibold text-gray-600">Total Task </p>
-                            </div>
-                        </div>
-
-                        <div class="group relative bg-white p-4 md:p-5 rounded-lg-xl shadow-card-purple text-gray-800 flex items-center space-x-3 md:space-x-4
-                                    transform hover:-translate-y-1 hover:shadow-card-hover-glow transition-all duration-300 ease-in-out cursor-pointer border border-gray-100">
-                            <div class="flex-shrink-0 p-2 md:p-3 rounded-full bg-accent-red text-white">
-                                <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            </div>
-                            <div>
-                                <p class="text-2xl md:text-3xl font-extrabold text-accent-red">3</p>
-                                <p class="text-sm md:text-md font-semibold text-gray-600">Task Terlambat</p>
-                            </div>
-                        </div>
-
-                        <div class="group relative bg-white p-4 md:p-5 rounded-lg-xl shadow-card-purple text-gray-800 flex items-center space-x-3 md:space-x-4
-                                    transform hover:-translate-y-1 hover:shadow-card-hover-glow transition-all duration-300 ease-in-out cursor-pointer border border-gray-100">
-                            <div class="flex-shrink-0 p-2 md:p-3 rounded-full bg-accent-green text-white">
-                                <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"></path></svg>
-                            </div>
-                            <div>
-                                <p class="text-2xl md:text-3xl font-extrabold text-accent-green">12</p>
-                                <p class="text-sm md:text-md font-semibold text-gray-600">Task Belum Proses</p>
+                                <p class="text-2xl md:text-3xl font-extrabold text-primary-purple">32</p>
+                                <p class="text-sm md:text-md font-semibold text-gray-600">Task Selesai</p>
                             </div>
                         </div>
 
                         <div class="group relative bg-white p-4 md:p-5 rounded-lg-xl shadow-card-purple text-gray-800 flex items-center space-x-3 md:space-x-4
                                     transform hover:-translate-y-1 hover:shadow-card-hover-glow transition-all duration-300 ease-in-out cursor-pointer border border-gray-100">
                             <div class="flex-shrink-0 p-2 md:p-3 rounded-full bg-accent-yellow text-white">
-                                <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18s-3.332.477-4.5 1.253"></path></svg>
+                                <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                             </div>
                             <div>
-                                <p class="text-2xl md:text-3xl font-extrabold text-accent-yellow">2</p>
-                                <p class="text-sm md:text-md font-semibold text-gray-600">Task  Selesai</p>
+                                <p class="text-2xl md:text-3xl font-extrabold text-accent-yellow">8</p>
+                                <p class="text-sm md:text-md font-semibold text-gray-600">Task Diproses</p>
+                            </div>
+                        </div>
+
+                        <div class="group relative bg-white p-4 md:p-5 rounded-lg-xl shadow-card-purple text-gray-800 flex items-center space-x-3 md:space-x-4
+                                    transform hover:-translate-y-1 hover:shadow-card-hover-glow transition-all duration-300 ease-in-out cursor-pointer border border-gray-100">
+                            <div class="flex-shrink-0 p-2 md:p-3 rounded-full bg-accent-red text-white">
+                                <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                            </div>
+                            <div>
+                                <p class="text-2xl md:text-3xl font-extrabold text-accent-red">3</p>
+                                <p class="text-sm md:text-md font-semibold text-gray-600">Bug Terlambat</p>
+                            </div>
+                        </div>
+
+                        <div class="group relative bg-white p-4 md:p-5 rounded-lg-xl shadow-card-purple text-gray-800 flex items-center space-x-3 md:space-x-4
+                                    transform hover:-translate-y-1 hover:shadow-card-hover-glow transition-all duration-300 ease-in-out cursor-pointer border border-gray-100">
+                            <div class="flex-shrink-0 p-2 md:p-3 rounded-full bg-accent-green text-white">
+                                <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m-9 4h.01M12 12h.01"></path></svg>
+                            </div>
+                            <div>
+                                <p class="text-2xl md:text-3xl font-extrabold text-accent-green">5</p>
+                                <p class="text-sm md:text-md font-semibold text-gray-600">Total Task</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="bg-white p-5 md:p-6 rounded-xl-2xl shadow-custom border border-gray-100 mb-6 md:mb-8">
-                        <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-5 md:mb-6">Tugas Mendesak & Bug Prioritas</h2>
-                        <ul class="space-y-3 md:space-y-4">
-                            <li class="flex items-center bg-red-50 p-3 rounded-lg border border-red-200">
-                                <svg class="w-5 h-5 md:w-6 md:h-6 text-red-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2A9 9 0 111 12a9 9 0 0118 0z"></path></svg>
-                                <div>
-                                    <p class="font-medium text-gray-800 text-sm md:text-base">BUG: Login Error pada Mobile App</p>
-                                    <p class="text-xs md:text-sm text-gray-600">Modul: Authentication - Prioritas: Kritikal</p>
-                                    <p class="text-xs md:text-sm text-red-500">Deadline: Hari Ini</p>
-                                </div>
-                            </li>
-                            <li class="flex items-center bg-yellow-50 p-3 rounded-lg border border-yellow-200">
-                                <svg class="w-5 h-5 md:w-6 md:h-6 text-yellow-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                                <div>
-                                    <p class="font-medium text-gray-800 text-sm md:text-base">Task: Implementasi Fitur Filter Data</p>
-                                    <p class="text-xs md:text-sm text-gray-600">Proyek: X - Deadline: 05 Juli 2025</p>
-                                </div>
-                            </li>
-                            <li class="flex items-center bg-blue-50 p-3 rounded-lg border border-blue-200">
-                                <svg class="w-5 h-5 md:w-6 md:h-6 text-blue-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z"></path></svg>
-                                <div>
-                                    <p class="font-medium text-gray-800 text-sm md:text-base">Review Code untuk Modul Laporan</p>
-                                    <p class="text-xs md:text-sm text-gray-600">Requested by: Lead Dev - Branch: feature/reports</p>
-                                </div>
-                            </li>
-                        </ul>
+                    <div class="grid grid-cols-1 gap-4 md:gap-6 mb-6 md:mb-8">
+                        <div class="bg-white p-5 md:p-6 rounded-xl-2xl shadow-custom border border-gray-100">
+                            <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-5 md:mb-6">Task Mendekati Deadline</h2>
+                            <ul class="space-y-3 md:space-y-4">
+                                <li class="flex items-center bg-red-50 p-3 rounded-lg border border-red-200">
+                                    <svg class="w-5 h-5 md:w-6 md:h-6 text-red-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <div>
+                                        <p class="font-medium text-gray-800 text-sm md:text-base">Implementasi Fitur Chat Real-time</p>
+                                        <p class="text-xs md:text-sm text-gray-600">Prioritas: Tinggi - Deadline: 05 Juli 2025</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-center bg-yellow-50 p-3 rounded-lg border border-yellow-200">
+                                    <svg class="w-5 h-5 md:w-6 md:h-6 text-yellow-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                    <div>
+                                        <p class="font-medium text-gray-800 text-sm md:text-base">Optimasi Performa Database (Modul Laporan)</p>
+                                        <p class="text-xs md:text-sm text-gray-600">Prioritas: Sedang - Deadline: 10 Juli 2025</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-center bg-blue-50 p-3 rounded-lg border border-blue-200">
+                                    <svg class="w-5 h-5 md:w-6 md:h-6 text-blue-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <div>
+                                        <p class="font-medium text-gray-800 text-sm md:text-base">Review Kode Modul Keamanan</p>
+                                        <p class="text-xs md:text-sm text-gray-600">Status: Menunggu Feedback QA</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
 
                     <div class="bg-white p-5 md:p-6 rounded-xl-2xl shadow-custom border border-gray-100">
-                        <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-5 md:mb-6">Status Task Programmer</h2>
+                        <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-5 md:mb-6">Progres Task Keseluruhan</h2>
                         <div class="space-y-5 md:space-y-6">
                             <div>
                                 <div class="flex items-center justify-between mb-1 md:mb-2">
-                                    <span class="text-md md:text-lg font-medium text-gray-700">Task Selesai</span>
-                                    <span class="text-md md:text-lg font-bold text-accent-green">65%</span>
+                                    <span class="text-md md:text-lg font-medium text-gray-700">Selesai</span>
+                                    <span class="text-md md:text-lg font-bold text-primary-purple">80%</span>
                                 </div>
                                 <div class="w-full bg-soft-purple rounded-full h-3 md:h-4">
-                                    <div class="bg-accent-green h-3 md:h-4 rounded-full" style="width:65%;"></div>
+                                    <div class="bg-primary-purple h-3 md:h-4 rounded-full" style="width:80%;"></div>
                                 </div>
                             </div>
 
                             <div>
                                 <div class="flex items-center justify-between mb-1 md:mb-2">
-                                    <span class="text-md md:text-lg font-medium text-gray-700">Task Belum Selesai</span>
-                                    <span class="text-md md:text-lg font-bold text-dark-purple">25%</span>
+                                    <span class="text-md md:text-lg font-medium text-gray-700">Dalam Proses</span>
+                                    <span class="text-md md:text-lg font-bold text-dark-purple">15%</span>
                                 </div>
                                 <div class="w-full bg-light-purple rounded-full h-3 md:h-4">
-                                    <div class="bg-dark-purple h-3 md:h-4 rounded-full" style="width:25%;"></div>
+                                    <div class="bg-dark-purple h-3 md:h-4 rounded-full" style="width:15%;"></div>
                                 </div>
                             </div>
 
                             <div>
                                 <div class="flex items-center justify-between mb-1 md:mb-2">
-                                    <span class="text-md md:text-lg font-medium text-gray-700">Task Terlambat</span>
-                                    <span class="text-md md:text-lg font-bold text-accent-red">10%</span>
+                                    <span class="text-md md:text-lg font-medium text-gray-700">Menunggu</span>
+                                    <span class="text-md md:text-lg font-bold text-gray-600">5%</span>
                                 </div>
-                                <div class="w-full bg-soft-purple rounded-full h-3 md:h-4">
-                                    <div class="bg-accent-red h-3 md:h-4 rounded-full" style="width:10%;"></div>
+                                <div class="w-full bg-gray-300 rounded-full h-3 md:h-4">
+                                    <div class="bg-gray-500 h-3 md:h-4 rounded-full" style="width:5%;"></div>
                                 </div>
                             </div>
                         </div>
@@ -338,6 +344,8 @@
             const sidebar = document.getElementById('sidebar');
             const menuToggle = document.getElementById('menu-toggle');
             const sidebarOverlay = document.getElementById('sidebar-overlay');
+            const mainContentWrapper = document.getElementById('main-content-wrapper');
+            const body = document.body;
 
             function toggleSubmenu(button) {
                 const submenu = button.nextElementSibling;
@@ -413,30 +421,70 @@
                 });
             });
 
-            // Mobile menu toggle
-            menuToggle.addEventListener('click', () => {
-                sidebar.classList.toggle('-translate-x-full');
-                sidebarOverlay.classList.toggle('hidden');
-            });
-
-            sidebarOverlay.addEventListener('click', () => {
-                sidebar.classList.add('-translate-x-full');
-                sidebarOverlay.classList.add('hidden');
-            });
-
             // Set initial active state (e.g., Dashboard)
             const initialActiveLink = document.querySelector('.sidebar-menu-item[data-menu="dashboard"]');
             if (initialActiveLink) {
                 setActiveLink(initialActiveLink);
             }
 
-            // Close sidebar if window resized to desktop
-            window.addEventListener('resize', () => {
-                if (window.innerWidth >= 768) { // md breakpoint
+            // Toggle sidebar visibility and main content width
+            menuToggle.addEventListener('click', () => {
+                const isSidebarHidden = sidebar.classList.contains('-translate-x-full');
+
+                if (isSidebarHidden) {
+                    // Show sidebar
                     sidebar.classList.remove('-translate-x-full');
-                    sidebarOverlay.classList.add('hidden');
+                    mainContentWrapper.classList.add('md:ml-64'); // Re-add margin for desktop
+                    body.classList.remove('sidebar-hidden'); // Remove full width class
+                    if (window.innerWidth < 768) { // For mobile overlay
+                        sidebarOverlay.classList.remove('hidden');
+                    }
+                } else {
+                    // Hide sidebar
+                    sidebar.classList.add('-translate-x-full');
+                    mainContentWrapper.classList.remove('md:ml-64'); // Remove margin for desktop
+                    body.classList.add('sidebar-hidden'); // Add full width class
+                    if (window.innerWidth < 768) { // For mobile overlay
+                        sidebarOverlay.classList.add('hidden');
+                    }
                 }
             });
+
+
+            sidebarOverlay.addEventListener('click', () => {
+                sidebar.classList.add('-translate-x-full');
+                sidebarOverlay.classList.add('hidden');
+                mainContentWrapper.classList.remove('md:ml-64');
+                body.classList.add('sidebar-hidden');
+            });
+
+            // Adjust sidebar visibility and main content width on window resize
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 768) { // md breakpoint
+                    // On desktop, ensure sidebar is visible and content takes margin
+                    sidebar.classList.remove('-translate-x-full');
+                    sidebarOverlay.classList.add('hidden');
+                    mainContentWrapper.classList.add('md:ml-64');
+                    body.classList.remove('sidebar-hidden');
+                } else {
+                    // On mobile, hide sidebar by default
+                    sidebar.classList.add('-translate-x-full');
+                    // Overlay should only be shown when sidebar is explicitly opened on mobile
+                    sidebarOverlay.classList.add('hidden');
+                    mainContentWrapper.classList.remove('md:ml-64');
+                    body.classList.remove('sidebar-hidden');
+                }
+            });
+
+            // Initial check on load for desktop view
+            if (window.innerWidth >= 768) {
+                sidebar.classList.remove('-translate-x-full');
+                mainContentWrapper.classList.add('md:ml-64');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                mainContentWrapper.classList.remove('md:ml-64');
+                body.classList.remove('sidebar-hidden');
+            }
         });
     </script>
 
